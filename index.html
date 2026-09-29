@@ -37,7 +37,7 @@ button:focus-visible{outline:5px solid var(--sun);outline-offset:4px}
 .art.a{left:10%;bottom:35%;animation:floatA 3s ease-in-out infinite}.art.b{right:10%;bottom:36%;animation:floatB 3.5s ease-in-out infinite}
 .title{position:absolute;z-index:20;left:50%;top:13px;transform:translateX(-50%) rotate(-1deg);width:min(92%,650px);text-align:center;background:#fffdf8f2;border:5px solid var(--ink);border-radius:25px;padding:8px 14px;box-shadow:var(--shadow)}
 .title .chapter{font-size:11px;font-weight:1000;opacity:.62;letter-spacing:.4px}.title strong{display:block;font-size:clamp(21px,6vw,32px);line-height:1.05}
-.target{position:absolute;z-index:30;left:50%;bottom:35%;transform:translateX(-50%);width:150px;height:150px;border:7px solid var(--ink);border-radius:40% 50% 44% 52%;background:#fff;box-shadow:0 13px 0 #173b5230;display:grid;place-items:center;cursor:pointer;font-size:72px;animation:bob 1.15s infinite;transition:transform .18s,background .18s}
+.hotspot{position:absolute;z-index:32;display:grid;place-items:center;width:86px;height:86px;border:4px solid var(--ink);border-radius:50%;background:#fff;box-shadow:0 8px 0 #173b5230;font-size:42px;cursor:pointer;animation:hotFloat 1.8s ease-in-out infinite;transition:transform .18s,opacity .2s,filter .2s}.hotspot:after{content:"";position:absolute;inset:-9px;border:4px dotted var(--sun);border-radius:50%;animation:hotRing 1.1s infinite}.hotspot.done{background:#e6f5dc;filter:saturate(.75);animation:hotDone .35s ease-out forwards}.hotspot.done:after{border-color:#79a96a;animation:none}.hotspot.h1{left:13%;bottom:42%}.hotspot.h2{right:13%;bottom:44%;animation-delay:.35s}.hotspot.h3{left:50%;bottom:35%;transform:translateX(-50%);animation-delay:.7s}.hotspot.hide{opacity:.18}.target{position:absolute;z-index:30;left:50%;bottom:35%;transform:translateX(-50%);width:150px;height:150px;border:7px solid var(--ink);border-radius:40% 50% 44% 52%;background:#fff;box-shadow:0 13px 0 #173b5230;display:grid;place-items:center;cursor:pointer;font-size:72px;animation:bob 1.15s infinite;transition:transform .18s,background .18s}
 .target:before{content:"";position:absolute;inset:-8px;border:3px solid #fff;border-radius:inherit;opacity:.8}
 .target:after{content:"";position:absolute;inset:-17px;border:6px dashed var(--sun);border-radius:45% 52% 48% 42%;animation:ring 1.2s infinite}
 .target.done{animation:celebrate .45s ease-out forwards;background:#e6f5dc}.target.done:after{animation:none;border-color:#79a96a}
@@ -57,13 +57,13 @@ button:focus-visible{outline:5px solid var(--sun);outline-offset:4px}
 .finish{display:none}.finish.show{display:flex}.bigHeart{font-size:78px;animation:heart 1s ease-in-out infinite}.restart{margin-top:10px;background:#fff}
 .confetti{position:absolute;z-index:75;left:50%;top:43%;pointer-events:none;font-size:25px;animation:burst .8s ease-out forwards}
 footer{background:var(--ink);color:#fff;text-align:center;font-size:10px;padding:7px;letter-spacing:.2px}
-@keyframes bob{50%{transform:translateX(-50%) translateY(-9px) rotate(2deg)}}@keyframes ring{50%{transform:scale(1.09) rotate(4deg);opacity:.35}}
+@keyframes hotFloat{50%{transform:translateY(-7px) rotate(2deg)}}@keyframes hotRing{50%{transform:scale(1.12);opacity:.35}}@keyframes hotDone{to{transform:scale(.88);opacity:.72}}@keyframes bob{50%{transform:translateX(-50%) translateY(-9px) rotate(2deg)}}@keyframes ring{50%{transform:scale(1.09) rotate(4deg);opacity:.35}}
 @keyframes pop{to{transform:translate(-50%,-50%) scale(1)}}@keyframes buttonIn{from{opacity:0;transform:translate(-50%,15px)}to{opacity:1;transform:translate(-50%,0)}}
 @keyframes celebrate{0%{transform:translateX(-50%) scale(1)}45%{transform:translateX(-50%) scale(1.13) rotate(-5deg)}100%{transform:translateX(-50%) scale(1) rotate(-4deg)}}
 @keyframes floatA{50%{transform:translateY(-8px) rotate(-2deg)}}@keyframes floatB{50%{transform:translateY(7px) rotate(2deg)}}
 @keyframes buddy{50%{transform:translateX(-50%) translateY(-8px)}}@keyframes heart{50%{transform:scale(1.12)}}@keyframes burst{to{transform:translate(var(--x),var(--y)) rotate(300deg);opacity:0}}
-.mode-easy .target{width:168px;height:168px;font-size:82px}.mode-easy .target:after{inset:-20px;border-width:7px}.mode-easy .hint{font-size:17px}.mode-hard .target{width:92px;height:92px;font-size:45px}.mode-hard .target:after{opacity:.35;animation:ring 2s infinite}.mode-hard .hint{opacity:.72}.mode-hard .art{opacity:.9}.hard-hide{opacity:0!important;transform:translate(-50%,8px)!important;pointer-events:none}@media(max-width:620px){.game{min-height:650px}.target{width:116px;height:116px;font-size:56px}.hint{bottom:19%;font-size:13px}.title{top:7px}.art.a{left:6%}.art.b{right:6%}.companion{font-size:44px}.steps{gap:5px}.steps div{padding:7px 6px;font-size:11px}}
-@media(max-width:380px){.title strong{font-size:22px}.target{width:103px;height:103px;font-size:49px}.hint{bottom:20%;padding:6px 12px}.steps div{font-size:10px}}
+.mode-easy .target{width:168px;height:168px;font-size:82px}.mode-easy .target:after{inset:-20px;border-width:7px}.mode-easy .hint{font-size:17px}.mode-hard .target{width:92px;height:92px;font-size:45px}.mode-hard .hotspot{width:66px;height:66px;font-size:31px}.mode-hard .hotspot.h1{left:9%}.mode-hard .hotspot.h2{right:9%}.mode-easy .hotspot{width:100px;height:100px;font-size:50px}.mode-hard .target:after{opacity:.35;animation:ring 2s infinite}.mode-hard .hint{opacity:.72}.mode-hard .art{opacity:.9}.hard-hide{opacity:0!important;transform:translate(-50%,8px)!important;pointer-events:none}@media(max-width:620px){.hotspot{width:70px;height:70px;font-size:34px}.hotspot.h1{left:7%;bottom:43%}.hotspot.h2{right:7%;bottom:44%}.hotspot.h3{bottom:35%}.game{min-height:650px}.target{width:116px;height:116px;font-size:56px}.hint{bottom:19%;font-size:13px}.title{top:7px}.art.a{left:6%}.art.b{right:6%}.companion{font-size:44px}.steps{gap:5px}.steps div{padding:7px 6px;font-size:11px}}
+@media(max-width:380px){.hotspot{width:62px;height:62px;font-size:30px}.hotspot.h1{left:5%}.hotspot.h2{right:5%}.title strong{font-size:22px}.target{width:103px;height:103px;font-size:49px}.hint{bottom:20%;padding:6px 12px}.steps div{font-size:10px}}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 </head>
@@ -77,10 +77,10 @@ footer{background:var(--ink);color:#fff;text-align:center;font-size:10px;padding
 <div class="scene" id="scene">
 <div class="hill"></div><div class="hill back"></div><div class="road"></div><div class="water"></div><div class="sign">PICÚN LEUFÚ</div>
 <div class="title"><div class="chapter" id="chapter">PARADA 1 · 7</div><strong id="title">💧 El agua</strong></div>
-<div class="art a" id="artA">🌿</div><div class="art b" id="artB">💦</div>
+<div class="art a" id="artA">🌿</div><div class="art b" id="artB">💦</div><button class="hotspot h1" id="hot1" aria-label="Descubrir">🌿</button><button class="hotspot h2" id="hot2" aria-label="Descubrir">💦</button><button class="hotspot h3" id="hot3" aria-label="Descubrir">💧</button>
 <div class="companion" id="companion">🧒</div>
 <button class="target" id="target" aria-label="Tocar el dibujo para descubrir">💧</button>
-<div class="hint" id="hint">👆 ¡TOCÁ EL DIBUJO!</div>
+<div class="hint" id="hint">👆 ¡BUSCÁ 3 COSAS!</div>
 <button class="next" id="next"><span>✨ ¡LO ENCONTRASTE!</span>➡️ SEGUIR AVENTURA</button>
 <div class="toast" id="toast"><b id="toastIcon">✨</b><span id="toastText"></span></div>
 <div class="menuPanel" id="menuPanel"><div class="menuBox"><h2>🎮 MENÚ</h2><p id="menuStatus">Aventura · Parada 1 de 7</p><div class="menuMode"><button data-menu-mode="easy"><span>🌈</span>TRANQUI</button><button data-menu-mode="normal"><span>⭐</span>AVENTURA</button><button data-menu-mode="hard"><span>🚀</span>EXPLORADOR</button></div><div class="menuActions"><button class="menuAction primary" id="continueBtn">▶ CONTINUAR</button><button class="menuAction" id="restartMenu">↻ REINICIAR AVENTURA</button><button class="menuAction" id="speakMenu">🔊 ESCUCHAR PARADA</button><button class="menuAction close" id="closeMenu">✕ CERRAR</button></div></div></div>
@@ -89,9 +89,9 @@ footer{background:var(--ink);color:#fff;text-align:center;font-size:10px;padding
 <span class="mascot">🧒🌈</span>
 <div class="logo">VILLA <b>PICÚN</b></div>
 <h1>Una aventura por Picún</h1>
-<div class="steps"><div>👀 MIRÁ</div><div>👆 TOCÁ</div><div>🎉 DESCUBRÍ</div></div>
+<div class="steps"><div>👀 MIRÁ</div><div>🔎 BUSCÁ</div><div>🎉 DESCUBRÍ</div></div>
 <div class="difficulty"><div class="difficultyTitle">🎮 ELEGÍ CÓMO QUERÉS JUGAR</div><div class="levels"><button class="level active" data-mode="easy"><span>🌈</span>TRANQUI</button><button class="level" data-mode="normal"><span>⭐</span>AVENTURA</button><button class="level" data-mode="hard"><span>🚀</span>EXPLORADOR</button></div></div>
-<p>No hace falta saber leer.<br><strong>La aventura cambia, pero siempre es fácil de entender.</strong></p>
+<p>No hace falta saber leer.<br><strong>Buscá 3 cosas escondidas en cada parada.</strong></p>
 <button class="startBtn" id="play">▶ EMPEZAR AVENTURA</button>
 </div>
 </div>
@@ -117,9 +117,9 @@ const stops=[
 {icon:"🐎",title:"La fiesta",theme:"sunset",a:"🎶",b:"🧺",voice:"El campo, la música, el trabajo y la comunidad se encuentran.",fact:"En 2026 la Fiesta del Chacarero y el Hombre de Campo fue declarada Fiesta Provincial."},
 {icon:"❤️",title:"Nuestra historia",theme:"day",a:"📖",b:"🏁",voice:"Llegamos al final. Agua, tierra, pueblo, pasado, patrimonio y comunidad.",fact:"La historia continúa cada vez que una persona conoce y cuenta su lugar."}
 ];
-let active=0,discovered=false,mode="normal",hardTimer=null;
+let active=0,discovered=false,mode="normal",hardTimer=null,foundCount=0;
 const $=id=>document.getElementById(id);
-const scene=$("scene"),target=$("target"),next=$("next"),hint=$("hint"),toast=$("toast"),companion=$("companion");
+const scene=$("scene"),target=$("target"),next=$("next"),hint=$("hint"),toast=$("toast"),companion=$("companion");\nconst hotspots=[$("hot1"),$("hot2"),$("hot3")];
 function applyMode(){document.querySelector(".game").classList.remove("mode-easy","mode-normal","mode-hard");document.querySelector(".game").classList.add("mode-"+mode);document.querySelectorAll(".level").forEach(b=>b.classList.toggle("active",b.dataset.mode===mode));document.querySelectorAll("[data-menu-mode]").forEach(b=>b.classList.toggle("active",b.dataset.menuMode===mode));}
 function speak(text){if(!("speechSynthesis" in window))return;try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(text);u.lang="es-AR";u.rate=.88;u.pitch=1.04;speechSynthesis.speak(u)}catch(e){}}
 function updateMenuStatus(){const names={easy:"TRANQUI",normal:"AVENTURA",hard:"EXPLORADOR"};$("menuStatus").textContent=names[mode]+" · Parada "+(active+1)+" de "+stops.length} 
@@ -128,17 +128,17 @@ function makeDots(){ $("dots").innerHTML=stops.map((_,i)=>'<i class="'+(i===acti
 function render(){
  const s=stops[active]; discovered=false;
  $("step").textContent=active+1; $("chapter").textContent="PARADA "+(active+1)+" · 7";
- $("title").textContent=s.icon+" "+s.title; $("artA").textContent=s.a; $("artB").textContent=s.b;
+ $("title").textContent=s.icon+" "+s.title; $("artA").textContent=s.a; $("artB").textContent=s.b;\nfoundCount=0; hotspots.forEach((h,i)=>{h.textContent=[s.a,s.b,s.icon][i];h.classList.remove("done","hide");h.style.pointerEvents="auto";});
  scene.className="scene "+(s.theme==="sunset"?"sunset":s.theme==="night"?"night":"");
  target.textContent=s.icon; target.classList.remove("done","hard-hide"); target.style.display="grid"; clearTimeout(hardTimer); if(mode==="hard"){hardTimer=setTimeout(()=>{if(!discovered)target.classList.add("hard-hide")},4200);}
- next.classList.remove("show"); hint.textContent="👆 ¡TOCÁ EL DIBUJO!"; companion.textContent=active===6?"🧒❤️":"🧒"; makeDots(); updateMenuStatus();
+ next.classList.remove("show"); hint.textContent="👆 ¡BUSCÁ 3 COSAS!"; companion.textContent=active===6?"🧒❤️":"🧒"; makeDots(); updateMenuStatus();
 }
 function confetti(){
  ["✨","⭐","🎉","💛","🌈","✦"].forEach((v,i)=>{const e=document.createElement("span");e.className="confetti";e.textContent=v;e.style.setProperty("--x",(i%2?1:-1)*(70+i*20)+"px");e.style.setProperty("--y",(-55-i*18)+"px");scene.appendChild(e);setTimeout(()=>e.remove(),900)})
 }
 function discover(){
  if(discovered)return; clearTimeout(hardTimer); discovered=true; const s=stops[active];
- target.classList.add("done"); hint.textContent="🎉 ¡MUY BIEN!"; next.classList.add("show");
+ target.classList.add("done"); hotspots.forEach(h=>h.classList.add("done")); hint.textContent="🎉 ¡ENCONTRASTE TODO!"; next.classList.add("show");
  $("toastIcon").textContent=s.icon; $("toastText").textContent=s.fact; toast.classList.add("show");
  setTimeout(()=>toast.classList.remove("show"),2100); speak(s.voice); confetti();
  companion.textContent=active===6?"🧒❤️":"🧒🎉"; setTimeout(()=>companion.textContent=active===6?"🧒❤️":"🧒",1200);
@@ -148,16 +148,16 @@ function advance(){
  if(!discovered){discover();return}
  active++;
  if(active>=stops.length){$("finish").classList.add("show");speak("¡Llegaste al final del recorrido de Villa Picún!");return}
- render(); speak("Nueva parada. Mirá y tocá el dibujo.");
+ render(); speak("Nueva parada. Buscá tres cosas y tocá cada una.");
 }
-target.addEventListener("click",discover); next.addEventListener("click",advance);
+target.addEventListener("click",()=>discoverHotspot(2)); hotspots.forEach((h,i)=>h.addEventListener("click",()=>discoverHotspot(i))); next.addEventListener("click",advance);
 $("menuBtn").addEventListener("click",openMenu); $("closeMenu").addEventListener("click",closeMenu); $("continueBtn").addEventListener("click",closeMenu);
-$("restartMenu").addEventListener("click",()=>{active=0;discovered=false;closeMenu();$("finish").classList.remove("show");render();speak("Empezamos de nuevo. Mirá y tocá el dibujo.");});
+$("restartMenu").addEventListener("click",()=>{active=0;discovered=false;closeMenu();$("finish").classList.remove("show");render();speak("Empezamos de nuevo. Buscá tres cosas y tocá cada una.");});
 $("speakMenu").addEventListener("click",()=>{speak(stops[active].voice);});
 document.querySelectorAll("[data-menu-mode]").forEach(btn=>btn.addEventListener("click",()=>{mode=btn.dataset.menuMode;applyMode();updateMenuStatus();}));
 document.querySelectorAll(".level").forEach(btn=>btn.addEventListener("click",()=>{mode=btn.dataset.mode;applyMode();}));
-$("play").addEventListener("click",()=>{$("start").style.display="none";render();speak("Mirá el dibujo grande y tocá cuando quieras.");});
-$("restart").addEventListener("click",()=>{active=0;$("finish").classList.remove("show");render();speak("Empezamos de nuevo. Mirá y tocá.");});
+$("play").addEventListener("click",()=>{$("start").style.display="none";render();speak("Mirá la escena. Buscá tres cosas y tocá cada una.");});
+$("restart").addEventListener("click",()=>{active=0;$("finish").classList.remove("show");render();speak("Empezamos de nuevo. Buscá tres cosas.");});
 applyMode();render();
 </script>
 </body>
