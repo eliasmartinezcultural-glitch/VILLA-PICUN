@@ -52,7 +52,7 @@ button:focus-visible{outline:5px solid var(--sun);outline-offset:4px}
 .box:before,.box:after{content:"✦";position:absolute;color:var(--sun);font-size:42px;opacity:.8}.box:before{left:14px;top:8px}.box:after{right:14px;bottom:8px}
 .logo{font-size:clamp(40px,12vw,72px);font-weight:1000;letter-spacing:-4px}.logo b{color:#c76e58}
 .mascot{font-size:78px;display:block;animation:buddy 2s ease-in-out infinite}.box h1{font-size:clamp(23px,7vw,36px);margin:3px 0 8px}.box p{font-weight:700;line-height:1.35}
-.steps{display:flex;justify-content:center;gap:10px;margin:15px 0 18px}.steps div{background:#fff;border:3px solid var(--ink);border-radius:15px;padding:8px 10px;font-weight:1000;font-size:12px;box-shadow:0 4px 0 #173b5230}
+.difficulty{margin:16px 0 12px}.difficultyTitle{font-size:13px;font-weight:1000;opacity:.7;margin-bottom:8px}.levels{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}.level{border:3px solid var(--ink);background:#fff;border-radius:14px;padding:9px 5px;font-weight:1000;font-size:11px;cursor:pointer;box-shadow:0 4px 0 #173b5230}.level.active{background:var(--sun);transform:translateY(-2px)}.level span{display:block;font-size:22px;margin-bottom:2px}.steps{display:flex;justify-content:center;gap:10px;margin:15px 0 18px}.steps div{background:#fff;border:3px solid var(--ink);border-radius:15px;padding:8px 10px;font-weight:1000;font-size:12px;box-shadow:0 4px 0 #173b5230}
 .startBtn{width:100%;min-height:70px;border:5px solid var(--ink);border-radius:19px;background:var(--sun);font-size:23px;font-weight:1000;cursor:pointer;box-shadow:0 7px 0 #173b5230}.startBtn:active{transform:translateY(4px);box-shadow:0 3px 0 #173b5230}
 .finish{display:none}.finish.show{display:flex}.bigHeart{font-size:78px;animation:heart 1s ease-in-out infinite}.restart{margin-top:10px;background:#fff}
 .confetti{position:absolute;z-index:75;left:50%;top:43%;pointer-events:none;font-size:25px;animation:burst .8s ease-out forwards}
@@ -62,7 +62,7 @@ footer{background:var(--ink);color:#fff;text-align:center;font-size:10px;padding
 @keyframes celebrate{0%{transform:translateX(-50%) scale(1)}45%{transform:translateX(-50%) scale(1.13) rotate(-5deg)}100%{transform:translateX(-50%) scale(1) rotate(-4deg)}}
 @keyframes floatA{50%{transform:translateY(-8px) rotate(-2deg)}}@keyframes floatB{50%{transform:translateY(7px) rotate(2deg)}}
 @keyframes buddy{50%{transform:translateX(-50%) translateY(-8px)}}@keyframes heart{50%{transform:scale(1.12)}}@keyframes burst{to{transform:translate(var(--x),var(--y)) rotate(300deg);opacity:0}}
-@media(max-width:620px){.game{min-height:650px}.target{width:116px;height:116px;font-size:56px}.hint{bottom:19%;font-size:13px}.title{top:7px}.art.a{left:6%}.art.b{right:6%}.companion{font-size:44px}.steps{gap:5px}.steps div{padding:7px 6px;font-size:11px}}
+.mode-easy .target{width:168px;height:168px;font-size:82px}.mode-easy .target:after{inset:-20px;border-width:7px}.mode-easy .hint{font-size:17px}.mode-hard .target{width:92px;height:92px;font-size:45px}.mode-hard .target:after{opacity:.35;animation:ring 2s infinite}.mode-hard .hint{opacity:.72}.mode-hard .art{opacity:.9}.hard-hide{opacity:0!important;transform:translate(-50%,8px)!important;pointer-events:none}@media(max-width:620px){.game{min-height:650px}.target{width:116px;height:116px;font-size:56px}.hint{bottom:19%;font-size:13px}.title{top:7px}.art.a{left:6%}.art.b{right:6%}.companion{font-size:44px}.steps{gap:5px}.steps div{padding:7px 6px;font-size:11px}}
 @media(max-width:380px){.title strong{font-size:22px}.target{width:103px;height:103px;font-size:49px}.hint{bottom:20%;padding:6px 12px}.steps div{font-size:10px}}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
@@ -89,7 +89,8 @@ footer{background:var(--ink);color:#fff;text-align:center;font-size:10px;padding
 <div class="logo">VILLA <b>PICÚN</b></div>
 <h1>Una aventura por Picún</h1>
 <div class="steps"><div>👀 MIRÁ</div><div>👆 TOCÁ</div><div>🎉 DESCUBRÍ</div></div>
-<p>No hace falta saber leer.<br><strong>Solo mirar, tocar y seguir.</strong></p>
+<div class="difficulty"><div class="difficultyTitle">🎮 ELEGÍ CÓMO QUERÉS JUGAR</div><div class="levels"><button class="level active" data-mode="easy"><span>🌈</span>TRANQUI</button><button class="level" data-mode="normal"><span>⭐</span>AVENTURA</button><button class="level" data-mode="hard"><span>🚀</span>EXPLORADOR</button></div></div>
+<p>No hace falta saber leer.<br><strong>La aventura cambia, pero siempre es fácil de entender.</strong></p>
 <button class="startBtn" id="play">▶ EMPEZAR AVENTURA</button>
 </div>
 </div>
@@ -115,9 +116,10 @@ const stops=[
 {icon:"🐎",title:"La fiesta",theme:"sunset",a:"🎶",b:"🧺",voice:"El campo, la música, el trabajo y la comunidad se encuentran.",fact:"En 2026 la Fiesta del Chacarero y el Hombre de Campo fue declarada Fiesta Provincial."},
 {icon:"❤️",title:"Nuestra historia",theme:"day",a:"📖",b:"🏁",voice:"Llegamos al final. Agua, tierra, pueblo, pasado, patrimonio y comunidad.",fact:"La historia continúa cada vez que una persona conoce y cuenta su lugar."}
 ];
-let active=0,discovered=false;
+let active=0,discovered=false,mode="normal",hardTimer=null;
 const $=id=>document.getElementById(id);
 const scene=$("scene"),target=$("target"),next=$("next"),hint=$("hint"),toast=$("toast"),companion=$("companion");
+function applyMode(){document.querySelector(".game").classList.remove("mode-easy","mode-normal","mode-hard");document.querySelector(".game").classList.add("mode-"+mode);document.querySelectorAll(".level").forEach(b=>b.classList.toggle("active",b.dataset.mode===mode));}
 function speak(text){if(!("speechSynthesis" in window))return;try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(text);u.lang="es-AR";u.rate=.88;u.pitch=1.04;speechSynthesis.speak(u)}catch(e){}}
 function makeDots(){ $("dots").innerHTML=stops.map((_,i)=>'<i class="'+(i===active?"on":"")+'"></i>').join("") }
 function render(){
@@ -125,14 +127,14 @@ function render(){
  $("step").textContent=active+1; $("chapter").textContent="PARADA "+(active+1)+" · 7";
  $("title").textContent=s.icon+" "+s.title; $("artA").textContent=s.a; $("artB").textContent=s.b;
  scene.className="scene "+(s.theme==="sunset"?"sunset":s.theme==="night"?"night":"");
- target.textContent=s.icon; target.classList.remove("done"); target.style.display="grid";
+ target.textContent=s.icon; target.classList.remove("done","hard-hide"); target.style.display="grid"; clearTimeout(hardTimer); if(mode==="hard"){hardTimer=setTimeout(()=>{if(!discovered)target.classList.add("hard-hide")},4200);}
  next.classList.remove("show"); hint.textContent="👆 ¡TOCÁ EL DIBUJO!"; companion.textContent=active===6?"🧒❤️":"🧒"; makeDots();
 }
 function confetti(){
  ["✨","⭐","🎉","💛","🌈","✦"].forEach((v,i)=>{const e=document.createElement("span");e.className="confetti";e.textContent=v;e.style.setProperty("--x",(i%2?1:-1)*(70+i*20)+"px");e.style.setProperty("--y",(-55-i*18)+"px");scene.appendChild(e);setTimeout(()=>e.remove(),900)})
 }
 function discover(){
- if(discovered)return; discovered=true; const s=stops[active];
+ if(discovered)return; clearTimeout(hardTimer); discovered=true; const s=stops[active];
  target.classList.add("done"); hint.textContent="🎉 ¡MUY BIEN!"; next.classList.add("show");
  $("toastIcon").textContent=s.icon; $("toastText").textContent=s.fact; toast.classList.add("show");
  setTimeout(()=>toast.classList.remove("show"),2100); speak(s.voice); confetti();
@@ -146,9 +148,10 @@ function advance(){
  render(); speak("Nueva parada. Mirá y tocá el dibujo.");
 }
 target.addEventListener("click",discover); next.addEventListener("click",advance);
+document.querySelectorAll(".level").forEach(btn=>btn.addEventListener("click",()=>{mode=btn.dataset.mode;applyMode();}));
 $("play").addEventListener("click",()=>{$("start").style.display="none";render();speak("Mirá el dibujo grande y tocá cuando quieras.");});
 $("restart").addEventListener("click",()=>{active=0;$("finish").classList.remove("show");render();speak("Empezamos de nuevo. Mirá y tocá.");});
-render();
+applyMode();render();
 </script>
 </body>
 </html>
