@@ -18,7 +18,7 @@ button:focus-visible{outline:5px solid var(--sun);outline-offset:4px}
 .app{min-height:100vh;display:flex;flex-direction:column}
 .top{height:64px;padding:8px 12px;background:var(--ink);color:#fff;display:flex;align-items:center;justify-content:space-between;gap:10px;position:relative;z-index:200}
 .brand{font-size:clamp(20px,6vw,30px);font-weight:1000;letter-spacing:-1.5px}.brand b{color:var(--sun)}
-.progress{display:flex;align-items:center;gap:7px}.progress i{width:30px;height:30px;border:3px solid var(--sun);border-radius:50%;display:grid;place-items:center;background:#fff;color:var(--ink);font-style:normal;font-weight:1000}
+.menuBtn{border:3px solid var(--sun);background:#fff;color:var(--ink);width:40px;height:40px;border-radius:13px;font-size:21px;font-weight:1000;cursor:pointer;box-shadow:0 4px 0 #0003}.progress{display:flex;align-items:center;gap:7px}.progress i{width:30px;height:30px;border:3px solid var(--sun);border-radius:50%;display:grid;place-items:center;background:#fff;color:var(--ink);font-style:normal;font-weight:1000}
 .progressDots{display:flex;gap:4px}.progressDots i{display:block;width:7px;height:7px;border-radius:50%;background:#ffffff45}.progressDots i.on{background:var(--sun);transform:scale(1.25)}
 .game{position:relative;flex:1;min-height:700px;overflow:hidden;background:var(--sky)}
 .scene{position:absolute;inset:0;overflow:hidden;background:linear-gradient(#9ee6f2 0 48%,#d8b878 48% 72%,#4db9d2 72%);isolation:isolate}
@@ -47,7 +47,7 @@ button:focus-visible{outline:5px solid var(--sun);outline-offset:4px}
 .toast{position:absolute;z-index:80;left:50%;top:44%;transform:translate(-50%,-50%) scale(.75);background:var(--cream);border:5px solid var(--ink);border-radius:25px;padding:17px 20px;text-align:center;display:none;box-shadow:0 12px #183b4b33;min-width:min(84%,400px)}
 .toast.show{display:block;animation:pop .32s forwards}.toast b{display:block;font-size:32px}.toast span{font-weight:800;line-height:1.25}
 .companion{position:absolute;z-index:25;left:50%;bottom:5%;transform:translateX(-50%);font-size:54px;filter:drop-shadow(0 5px 0 #173b5230);pointer-events:none;animation:buddy 2.4s ease-in-out infinite}
-.start,.finish{position:absolute;z-index:100;inset:0;background:linear-gradient(#b8e8ef,#fff0b5 60%,#55b8cf);display:flex;align-items:center;justify-content:center;padding:16px}
+.menuPanel{position:absolute;z-index:150;inset:0;background:#173b52cc;display:none;align-items:center;justify-content:center;padding:18px;backdrop-filter:blur(4px)}.menuPanel.show{display:flex}.menuBox{width:min(94%,520px);background:var(--cream);border:5px solid var(--ink);border-radius:28px;padding:22px 18px;box-shadow:0 14px 0 #0004;text-align:center}.menuBox h2{font-size:30px;margin:0 0 4px}.menuBox p{font-weight:800;margin:4px 0 16px}.menuActions{display:grid;gap:9px}.menuAction{min-height:58px;border:4px solid var(--ink);border-radius:17px;background:#fff;font-size:18px;font-weight:1000;cursor:pointer;box-shadow:0 5px 0 #173b5230}.menuAction.primary{background:var(--sun)}.menuAction.close{background:#f5dfe3}.menuMode{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin:10px 0}.menuMode button{border:3px solid var(--ink);border-radius:13px;background:#fff;padding:8px 3px;font-weight:1000;font-size:10px;cursor:pointer}.menuMode button.active{background:var(--sun)}.menuMode span{display:block;font-size:20px}.start,.finish{position:absolute;z-index:100;inset:0;background:linear-gradient(#b8e8ef,#fff0b5 60%,#55b8cf);display:flex;align-items:center;justify-content:center;padding:16px}
 .box{width:min(94%,620px);text-align:center;background:#fffdf5;border:5px solid var(--ink);border-radius:30px;padding:25px 18px;box-shadow:0 14px #183b4b33;position:relative;overflow:hidden}
 .box:before,.box:after{content:"✦";position:absolute;color:var(--sun);font-size:42px;opacity:.8}.box:before{left:14px;top:8px}.box:after{right:14px;bottom:8px}
 .logo{font-size:clamp(40px,12vw,72px);font-weight:1000;letter-spacing:-4px}.logo b{color:#c76e58}
@@ -70,7 +70,7 @@ footer{background:var(--ink);color:#fff;text-align:center;font-size:10px;padding
 <body>
 <main class="app">
 <header class="top">
-<div class="brand">VILLA <b>PICÚN</b></div>
+<button class="menuBtn" id="menuBtn" aria-label="Abrir menú">☰</button><div class="brand">VILLA <b>PICÚN</b></div>
 <div class="progress"><div class="progressDots" id="dots" aria-hidden="true"></div><i id="step">1</i><span>de 7</span></div>
 </header>
 <section class="game">
@@ -83,6 +83,7 @@ footer{background:var(--ink);color:#fff;text-align:center;font-size:10px;padding
 <div class="hint" id="hint">👆 ¡TOCÁ EL DIBUJO!</div>
 <button class="next" id="next"><span>✨ ¡LO ENCONTRASTE!</span>➡️ SEGUIR AVENTURA</button>
 <div class="toast" id="toast"><b id="toastIcon">✨</b><span id="toastText"></span></div>
+<div class="menuPanel" id="menuPanel"><div class="menuBox"><h2>🎮 MENÚ</h2><p id="menuStatus">Aventura · Parada 1 de 7</p><div class="menuMode"><button data-menu-mode="easy"><span>🌈</span>TRANQUI</button><button data-menu-mode="normal"><span>⭐</span>AVENTURA</button><button data-menu-mode="hard"><span>🚀</span>EXPLORADOR</button></div><div class="menuActions"><button class="menuAction primary" id="continueBtn">▶ CONTINUAR</button><button class="menuAction" id="restartMenu">↻ REINICIAR AVENTURA</button><button class="menuAction" id="speakMenu">🔊 ESCUCHAR PARADA</button><button class="menuAction close" id="closeMenu">✕ CERRAR</button></div></div></div>
 <div class="start" id="start">
 <div class="box">
 <span class="mascot">🧒🌈</span>
@@ -119,8 +120,10 @@ const stops=[
 let active=0,discovered=false,mode="normal",hardTimer=null;
 const $=id=>document.getElementById(id);
 const scene=$("scene"),target=$("target"),next=$("next"),hint=$("hint"),toast=$("toast"),companion=$("companion");
-function applyMode(){document.querySelector(".game").classList.remove("mode-easy","mode-normal","mode-hard");document.querySelector(".game").classList.add("mode-"+mode);document.querySelectorAll(".level").forEach(b=>b.classList.toggle("active",b.dataset.mode===mode));}
+function applyMode(){document.querySelector(".game").classList.remove("mode-easy","mode-normal","mode-hard");document.querySelector(".game").classList.add("mode-"+mode);document.querySelectorAll(".level").forEach(b=>b.classList.toggle("active",b.dataset.mode===mode));document.querySelectorAll("[data-menu-mode]").forEach(b=>b.classList.toggle("active",b.dataset.menuMode===mode));}
 function speak(text){if(!("speechSynthesis" in window))return;try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(text);u.lang="es-AR";u.rate=.88;u.pitch=1.04;speechSynthesis.speak(u)}catch(e){}}
+function updateMenuStatus(){const names={easy:"TRANQUI",normal:"AVENTURA",hard:"EXPLORADOR"};$("menuStatus").textContent=names[mode]+" · Parada "+(active+1)+" de "+stops.length} 
+function openMenu(){updateMenuStatus();applyMode();$("menuPanel").classList.add("show")} function closeMenu(){$("menuPanel").classList.remove("show")} 
 function makeDots(){ $("dots").innerHTML=stops.map((_,i)=>'<i class="'+(i===active?"on":"")+'"></i>').join("") }
 function render(){
  const s=stops[active]; discovered=false;
@@ -128,7 +131,7 @@ function render(){
  $("title").textContent=s.icon+" "+s.title; $("artA").textContent=s.a; $("artB").textContent=s.b;
  scene.className="scene "+(s.theme==="sunset"?"sunset":s.theme==="night"?"night":"");
  target.textContent=s.icon; target.classList.remove("done","hard-hide"); target.style.display="grid"; clearTimeout(hardTimer); if(mode==="hard"){hardTimer=setTimeout(()=>{if(!discovered)target.classList.add("hard-hide")},4200);}
- next.classList.remove("show"); hint.textContent="👆 ¡TOCÁ EL DIBUJO!"; companion.textContent=active===6?"🧒❤️":"🧒"; makeDots();
+ next.classList.remove("show"); hint.textContent="👆 ¡TOCÁ EL DIBUJO!"; companion.textContent=active===6?"🧒❤️":"🧒"; makeDots(); updateMenuStatus();
 }
 function confetti(){
  ["✨","⭐","🎉","💛","🌈","✦"].forEach((v,i)=>{const e=document.createElement("span");e.className="confetti";e.textContent=v;e.style.setProperty("--x",(i%2?1:-1)*(70+i*20)+"px");e.style.setProperty("--y",(-55-i*18)+"px");scene.appendChild(e);setTimeout(()=>e.remove(),900)})
@@ -148,6 +151,10 @@ function advance(){
  render(); speak("Nueva parada. Mirá y tocá el dibujo.");
 }
 target.addEventListener("click",discover); next.addEventListener("click",advance);
+$("menuBtn").addEventListener("click",openMenu); $("closeMenu").addEventListener("click",closeMenu); $("continueBtn").addEventListener("click",closeMenu);
+$("restartMenu").addEventListener("click",()=>{active=0;discovered=false;closeMenu();$("finish").classList.remove("show");render();speak("Empezamos de nuevo. Mirá y tocá el dibujo.");});
+$("speakMenu").addEventListener("click",()=>{speak(stops[active].voice);});
+document.querySelectorAll("[data-menu-mode]").forEach(btn=>btn.addEventListener("click",()=>{mode=btn.dataset.menuMode;applyMode();updateMenuStatus();}));
 document.querySelectorAll(".level").forEach(btn=>btn.addEventListener("click",()=>{mode=btn.dataset.mode;applyMode();}));
 $("play").addEventListener("click",()=>{$("start").style.display="none";render();speak("Mirá el dibujo grande y tocá cuando quieras.");});
 $("restart").addEventListener("click",()=>{active=0;$("finish").classList.remove("show");render();speak("Empezamos de nuevo. Mirá y tocá.");});
