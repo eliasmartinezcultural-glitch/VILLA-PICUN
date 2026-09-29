@@ -37,11 +37,11 @@ button:focus-visible{outline:5px solid var(--sun);outline-offset:4px}
 .art.a{left:10%;bottom:35%;animation:floatA 3s ease-in-out infinite}.art.b{right:10%;bottom:36%;animation:floatB 3.5s ease-in-out infinite}
 .title{position:absolute;z-index:20;left:50%;top:13px;transform:translateX(-50%) rotate(-1deg);width:min(92%,650px);text-align:center;background:#fffdf8f2;border:5px solid var(--ink);border-radius:25px;padding:8px 14px;box-shadow:var(--shadow)}
 .title .chapter{font-size:11px;font-weight:1000;opacity:.62;letter-spacing:.4px}.title strong{display:block;font-size:clamp(21px,6vw,32px);line-height:1.05}
-.hotspot{position:absolute;z-index:32;display:grid;place-items:center;width:86px;height:86px;border:4px solid var(--ink);border-radius:50%;background:#fff;box-shadow:0 8px 0 #173b5230;font-size:42px;cursor:pointer;animation:hotFloat 1.8s ease-in-out infinite;transition:transform .18s,opacity .2s,filter .2s}.hotspot:after{content:"";position:absolute;inset:-9px;border:4px dotted var(--sun);border-radius:50%;animation:hotRing 1.1s infinite}.hotspot.done{background:#e6f5dc;filter:saturate(.75);animation:hotDone .35s ease-out forwards}.hotspot.done:after{border-color:#79a96a;animation:none}.hotspot.h1{left:13%;bottom:42%}.hotspot.h2{right:13%;bottom:44%;animation-delay:.35s}.hotspot.h3{left:50%;bottom:35%;transform:translateX(-50%);animation-delay:.7s}.hotspot.hide{opacity:.18}.target{position:absolute;z-index:30;left:50%;bottom:35%;transform:translateX(-50%);width:150px;height:150px;border:7px solid var(--ink);border-radius:40% 50% 44% 52%;background:#fff;box-shadow:0 13px 0 #173b5230;display:grid;place-items:center;cursor:pointer;font-size:72px;animation:bob 1.15s infinite;transition:transform .18s,background .18s}
+.hotspot{position:absolute;z-index:32;display:grid;place-items:center;width:78px;height:78px;border:0;border-radius:24px;background:transparent;box-shadow:none;font-size:52px;cursor:pointer;animation:discoverFloat 2.2s ease-in-out infinite;transition:transform .18s,opacity .2s,filter .2s}.hotspot:before{content:"";position:absolute;inset:8px;border-radius:50%;background:#fff5;box-shadow:0 0 0 3px #fff6,0 0 22px #fff8;z-index:-1}.hotspot:after{content:"";position:absolute;inset:1px;border:3px dashed var(--sun);border-radius:50%;opacity:.65;animation:hotRing 1.5s infinite}.hotspot.done{animation:discoverDone .35s ease-out forwards;filter:saturate(.72);opacity:.8}.hotspot.done:before{background:#dff2d8b8;box-shadow:0 0 0 3px #79a96a66}.hotspot.done:after{border-color:#79a96a;animation:none}.hotspot.h1{left:12%;bottom:42%}.hotspot.h2{right:12%;bottom:44%;animation-delay:.35s}.hotspot.h3{left:50%;bottom:35%;transform:translateX(-50%);animation-delay:.7s}.hotspot.hide{opacity:.18}.target{display:none}
 .target:before{content:"";position:absolute;inset:-8px;border:3px solid #fff;border-radius:inherit;opacity:.8}
 .target:after{content:"";position:absolute;inset:-17px;border:6px dashed var(--sun);border-radius:45% 52% 48% 42%;animation:ring 1.2s infinite}
 .target.done{animation:celebrate .45s ease-out forwards;background:#e6f5dc}.target.done:after{animation:none;border-color:#79a96a}
-.hint{position:absolute;z-index:31;left:50%;bottom:20%;transform:translateX(-50%) rotate(1deg);background:#fff;border:4px solid var(--ink);border-radius:17px;padding:8px 18px;font-weight:1000;font-size:16px;white-space:nowrap;box-shadow:0 6px 0 #173b5230}
+.hint{position:absolute;z-index:31;left:50%;bottom:20%;transform:translateX(-50%) rotate(1deg);background:#fff;border:4px solid var(--ink);border-radius:17px;padding:8px 18px;font-weight:1000;font-size:16px;white-space:nowrap;box-shadow:0 6px 0 #173b5230}.memory{position:absolute;z-index:34;left:50%;top:82px;transform:translateX(-50%);display:flex;gap:7px;padding:6px 9px;border:3px solid var(--ink);border-radius:18px;background:#fffdf5dd;box-shadow:0 4px 0 #173b5230}.memory i{width:28px;height:28px;border-radius:10px;display:grid;place-items:center;background:#fff;border:2px solid #173b523080;font-style:normal;font-size:15px;opacity:.42;transition:.2s}.memory i.found{opacity:1;background:#e6f5dc;border-color:#79a96a;transform:translateY(-2px) scale(1.08)}
 .next{position:absolute;z-index:50;left:50%;bottom:13px;transform:translateX(-50%);width:min(92%,560px);min-height:76px;border:5px solid var(--ink);border-radius:23px;background:var(--sun);color:var(--ink);font-size:22px;font-weight:1000;box-shadow:0 8px 0 #173b5230;cursor:pointer;display:none}
 .next.show{display:block;animation:buttonIn .3s ease-out}.next:active,.startBtn:active{transform:translateX(-50%) translateY(4px);box-shadow:0 4px 0 #173b5230}.next span{display:block;font-size:11px;opacity:.7}
 .toast{position:absolute;z-index:80;left:50%;top:44%;transform:translate(-50%,-50%) scale(.75);background:var(--cream);border:5px solid var(--ink);border-radius:25px;padding:17px 20px;text-align:center;display:none;box-shadow:0 12px #183b4b33;min-width:min(84%,400px)}
@@ -57,13 +57,13 @@ button:focus-visible{outline:5px solid var(--sun);outline-offset:4px}
 .finish{display:none}.finish.show{display:flex}.bigHeart{font-size:78px;animation:heart 1s ease-in-out infinite}.restart{margin-top:10px;background:#fff}
 .confetti{position:absolute;z-index:75;left:50%;top:43%;pointer-events:none;font-size:25px;animation:burst .8s ease-out forwards}
 footer{background:var(--ink);color:#fff;text-align:center;font-size:10px;padding:7px;letter-spacing:.2px}
-@keyframes hotFloat{50%{transform:translateY(-7px) rotate(2deg)}}@keyframes hotRing{50%{transform:scale(1.12);opacity:.35}}@keyframes hotDone{to{transform:scale(.88);opacity:.72}}@keyframes bob{50%{transform:translateX(-50%) translateY(-9px) rotate(2deg)}}@keyframes ring{50%{transform:scale(1.09) rotate(4deg);opacity:.35}}
+@keyframes discoverFloat{50%{transform:translateY(-8px) rotate(2deg) scale(1.04)}}@keyframes discoverDone{45%{transform:scale(1.22) rotate(-7deg)}100%{transform:scale(.9)}}@keyframes hotRing{50%{transform:scale(1.12);opacity:.35}}@keyframes hotDone{to{transform:scale(.88);opacity:.72}}@keyframes bob{50%{transform:translateX(-50%) translateY(-9px) rotate(2deg)}}@keyframes ring{50%{transform:scale(1.09) rotate(4deg);opacity:.35}}
 @keyframes pop{to{transform:translate(-50%,-50%) scale(1)}}@keyframes buttonIn{from{opacity:0;transform:translate(-50%,15px)}to{opacity:1;transform:translate(-50%,0)}}
 @keyframes celebrate{0%{transform:translateX(-50%) scale(1)}45%{transform:translateX(-50%) scale(1.13) rotate(-5deg)}100%{transform:translateX(-50%) scale(1) rotate(-4deg)}}
 @keyframes floatA{50%{transform:translateY(-8px) rotate(-2deg)}}@keyframes floatB{50%{transform:translateY(7px) rotate(2deg)}}
 @keyframes buddy{50%{transform:translateX(-50%) translateY(-8px)}}@keyframes heart{50%{transform:scale(1.12)}}@keyframes burst{to{transform:translate(var(--x),var(--y)) rotate(300deg);opacity:0}}
-.mode-easy .target{width:168px;height:168px;font-size:82px}.mode-easy .target:after{inset:-20px;border-width:7px}.mode-easy .hint{font-size:17px}.mode-hard .target{width:92px;height:92px;font-size:45px}.mode-hard .hotspot{width:66px;height:66px;font-size:31px}.mode-hard .hotspot.h1{left:9%}.mode-hard .hotspot.h2{right:9%}.mode-easy .hotspot{width:100px;height:100px;font-size:50px}.mode-hard .target:after{opacity:.35;animation:ring 2s infinite}.mode-hard .hint{opacity:.72}.mode-hard .art{opacity:.9}.hard-hide{opacity:0!important;transform:translate(-50%,8px)!important;pointer-events:none}@media(max-width:620px){.hotspot{width:70px;height:70px;font-size:34px}.hotspot.h1{left:7%;bottom:43%}.hotspot.h2{right:7%;bottom:44%}.hotspot.h3{bottom:35%}.game{min-height:650px}.target{width:116px;height:116px;font-size:56px}.hint{bottom:19%;font-size:13px}.title{top:7px}.art.a{left:6%}.art.b{right:6%}.companion{font-size:44px}.steps{gap:5px}.steps div{padding:7px 6px;font-size:11px}}
-@media(max-width:380px){.hotspot{width:62px;height:62px;font-size:30px}.hotspot.h1{left:5%}.hotspot.h2{right:5%}.title strong{font-size:22px}.target{width:103px;height:103px;font-size:49px}.hint{bottom:20%;padding:6px 12px}.steps div{font-size:10px}}
+.mode-easy .hint{font-size:17px}.mode-easy .hotspot{width:94px;height:94px;font-size:60px}.mode-easy .hotspot:after{border-width:4px}.mode-hard .hotspot{width:60px;height:60px;font-size:38px}.mode-hard .hotspot.h1{left:9%}.mode-hard .hotspot.h2{right:9%}.mode-easy .hotspot{width:100px;height:100px;font-size:50px}.mode-hard .hint{opacity:.72}.mode-hard .hotspot:after{opacity:.3}.mode-hard .hotspot:before{opacity:.55}.mode-hard .art{opacity:.9}.hard-hide{opacity:.12!important;filter:grayscale(.4)!important}@media(max-width:620px){.hotspot{width:68px;height:68px;font-size:38px}.hotspot.h1{left:6%;bottom:43%}.hotspot.h2{right:6%;bottom:44%}.hotspot.h3{bottom:35%}.memory{top:78px}.game{min-height:650px}.target{width:116px;height:116px;font-size:56px}.hint{bottom:19%;font-size:13px}.title{top:7px}.art.a{left:6%}.art.b{right:6%}.companion{font-size:44px}.steps{gap:5px}.steps div{padding:7px 6px;font-size:11px}}
+@media(max-width:380px){.hotspot{width:58px;height:58px;font-size:32px}.hotspot.h1{left:5%}.hotspot.h2{right:5%}.title strong{font-size:22px}.target{width:103px;height:103px;font-size:49px}.hint{bottom:20%;padding:6px 12px}.steps div{font-size:10px}}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 </head>
@@ -77,9 +77,9 @@ footer{background:var(--ink);color:#fff;text-align:center;font-size:10px;padding
 <div class="scene" id="scene">
 <div class="hill"></div><div class="hill back"></div><div class="road"></div><div class="water"></div><div class="sign">PICÚN LEUFÚ</div>
 <div class="title"><div class="chapter" id="chapter">PARADA 1 · 7</div><strong id="title">💧 El agua</strong></div>
-<div class="art a" id="artA">🌿</div><div class="art b" id="artB">💦</div><button class="hotspot h1" id="hot1" aria-label="Descubrir">🌿</button><button class="hotspot h2" id="hot2" aria-label="Descubrir">💦</button><button class="hotspot h3" id="hot3" aria-label="Descubrir">💧</button>
+<div class="art a" id="artA">🌿</div><div class="art b" id="artB">💦</div><div class="memory" aria-label="Recuerdos encontrados"><i id="mem1">?</i><i id="mem2">?</i><i id="mem3">?</i></div><button class="hotspot h1" id="hot1" aria-label="Descubrir elemento de la escena">🌿</button><button class="hotspot h2" id="hot2" aria-label="Descubrir elemento de la escena">💦</button><button class="hotspot h3" id="hot3" aria-label="Descubrir elemento de la escena">💧</button>
 <div class="companion" id="companion">🧒</div>
-<button class="target" id="target" aria-label="Tocar el dibujo para descubrir">💧</button>
+<div class="target" id="target" aria-hidden="true"></div>
 <div class="hint" id="hint">👆 ¡BUSCÁ 3 COSAS!</div>
 <button class="next" id="next"><span>✨ ¡LO ENCONTRASTE!</span>➡️ SEGUIR AVENTURA</button>
 <div class="toast" id="toast"><b id="toastIcon">✨</b><span id="toastText"></span></div>
@@ -91,7 +91,7 @@ footer{background:var(--ink);color:#fff;text-align:center;font-size:10px;padding
 <h1>Una aventura por Picún</h1>
 <div class="steps"><div>👀 MIRÁ</div><div>🔎 BUSCÁ</div><div>🎉 DESCUBRÍ</div></div>
 <div class="difficulty"><div class="difficultyTitle">🎮 ELEGÍ CÓMO QUERÉS JUGAR</div><div class="levels"><button class="level active" data-mode="easy"><span>🌈</span>TRANQUI</button><button class="level" data-mode="normal"><span>⭐</span>AVENTURA</button><button class="level" data-mode="hard"><span>🚀</span>EXPLORADOR</button></div></div>
-<p>No hace falta saber leer.<br><strong>Buscá 3 cosas escondidas en cada parada.</strong></p>
+<p>No hace falta saber leer.<br><strong>Explorá la escena y encontrá 3 cosas de Picún.</strong></p><small style="display:block;font-weight:900;opacity:.62;margin:10px 0 12px">Una experiencia original de Ocarina Producciones</small>
 <button class="startBtn" id="play">▶ EMPEZAR AVENTURA</button>
 </div>
 </div>
@@ -99,28 +99,29 @@ footer{background:var(--ink);color:#fff;text-align:center;font-size:10px;padding
 <div class="box">
 <div class="bigHeart">❤️</div><h1>¡Llegaste!</h1>
 <p style="font-size:21px">¡Recorriste Villa Picún!</p>
-<p>Agua, tierra, pueblo, pasado, patrimonio y comunidad.<br><strong>La historia sigue viva cuando la conocemos y la cuidamos. 🌱</strong></p>
+<p>Agua, tierra, pueblo, pasado, patrimonio y comunidad.<br><strong>La historia sigue viva cuando la conocemos y la cuidamos. 🌱</strong></p><small style="display:block;font-weight:900;opacity:.62;margin:10px 0 12px">Tecnología desarrollada por Elías Martínez / Ocarina Producciones</small>
 <button class="startBtn restart" id="restart">↻ VOLVER A JUGAR</button>
 </div>
 </div>
 </div>
 </section>
-<footer>🌈 MIRÁ · TOCÁ · DESCUBRÍ · SEGUÍ</footer>
+<footer>🌈 MIRÁ · BUSCÁ · DESCUBRÍ · SEGUÍ · <strong>OCARINA PRODUCCIONES</strong></footer>
 </main>
 <script>
 const stops=[
-{icon:"💧",title:"El agua",theme:"day",a:"🌿",b:"💦",voice:"El agua. El arroyo Picún Leufú. Acá empieza nuestro viaje.",fact:"El arroyo y el embalse forman parte del paisaje de Picún Leufú."},
-{icon:"🌾",title:"La tierra",theme:"field",a:"🌳",b:"🧺",voice:"La tierra. Las chacras, los árboles y el trabajo.",fact:"La actividad agrícola y ganadera forma parte de la historia local."},
-{icon:"🏘️",title:"El pueblo",theme:"sunset",a:"🏚️",b:"🌊",voice:"El pueblo cambió. Hubo un antiguo asentamiento y un nuevo pueblo.",fact:"El nuevo asentamiento fue inaugurado en 1971."},
-{icon:"👣",title:"El pasado",theme:"night",a:"🦴",b:"🔎",voice:"Mucho antes de nosotros. El territorio guarda huellas de otros tiempos.",fact:"El departamento tiene sitios de interés paleontológico."},
-{icon:"🌲",title:"El Sauce",theme:"field",a:"🪵",b:"🛡️",voice:"El Sauce. Un lugar de mucho tiempo que tenemos que cuidar.",fact:"El Bosque Petrificado El Sauce es patrimonio cultural e histórico provincial."},
-{icon:"🐎",title:"La fiesta",theme:"sunset",a:"🎶",b:"🧺",voice:"El campo, la música, el trabajo y la comunidad se encuentran.",fact:"En 2026 la Fiesta del Chacarero y el Hombre de Campo fue declarada Fiesta Provincial."},
-{icon:"❤️",title:"Nuestra historia",theme:"day",a:"📖",b:"🏁",voice:"Llegamos al final. Agua, tierra, pueblo, pasado, patrimonio y comunidad.",fact:"La historia continúa cada vez que una persona conoce y cuenta su lugar."}
+{icon:"💧",title:"El agua",theme:"day",voice:"El agua. El arroyo Picún Leufú. Acá empieza nuestro viaje.",fact:"El arroyo y el embalse forman parte del paisaje de Picún Leufú.",finds:[["🌿","una planta de la orilla","h1"],["🐟","un pez del agua","h2"],["🪨","una piedra junto al arroyo","h3"]]},
+{icon:"🌾",title:"La tierra",theme:"field",voice:"La tierra. Las chacras, los árboles y el trabajo.",fact:"La actividad agrícola y ganadera forma parte de la historia local.",finds:[["🌳","un árbol","h1"],["🌾","un cultivo","h2"],["🧺","una canasta de la chacra","h3"]]},
+{icon:"🏘️",title:"El pueblo",theme:"sunset",voice:"El pueblo cambió. Hubo un antiguo asentamiento y un nuevo pueblo.",fact:"El nuevo asentamiento fue inaugurado en 1971.",finds:[["🏚️","una casa de otros tiempos","h1"],["🛣️","el camino del pueblo","h2"],["🌊","el agua que acompaña al pueblo","h3"]]},
+{icon:"👣",title:"El pasado",theme:"night",voice:"Mucho antes de nosotros. El territorio guarda huellas de otros tiempos.",fact:"El departamento tiene sitios de interés paleontológico.",finds:[["🦴","una huella del pasado","h1"],["🔎","una pista para investigar","h2"],["🪨","una roca antigua","h3"]]},
+{icon:"🌲",title:"El Sauce",theme:"field",voice:"El Sauce. Un lugar de mucho tiempo que tenemos que cuidar.",fact:"El Bosque Petrificado El Sauce es patrimonio cultural e histórico provincial.",finds:[["🪵","un tronco petrificado","h1"],["🌲","un árbol del lugar","h2"],["🛡️","un símbolo de cuidado","h3"]]},
+{icon:"🐎",title:"La fiesta",theme:"sunset",voice:"El campo, la música, el trabajo y la comunidad se encuentran.",fact:"En 2026 la Fiesta del Chacarero y el Hombre de Campo fue declarada Fiesta Provincial.",finds:[["🐎","un caballo","h1"],["🎶","música de la fiesta","h2"],["🧺","algo hecho por la gente del campo","h3"]]},
+{icon:"❤️",title:"Nuestra historia",theme:"day",voice:"Llegamos al final. Agua, tierra, pueblo, pasado, patrimonio y comunidad.",fact:"La historia continúa cada vez que una persona conoce y cuenta su lugar.",finds:[["📖","una página de nuestra historia","h1"],["❤️","algo que queremos de nuestro lugar","h2"],["🏁","la llegada","h3"]]}
 ];
 
 let active=0,discovered=false,mode="normal",hardTimer=null,foundCount=0,toastTimer=null;
 const $=id=>document.getElementById(id);
 const scene=$("scene"),target=$("target"),next=$("next"),hint=$("hint"),toast=$("toast"),companion=$("companion");
+const memories=[$("mem1"),$("mem2"),$("mem3")];
 const hotspots=[$("hot1"),$("hot2"),$("hot3")];
 
 function applyMode(){
@@ -161,21 +162,22 @@ function render(){
  $("step").textContent=active+1;
  $("chapter").textContent="PARADA "+(active+1)+" · 7";
  $("title").textContent=s.icon+" "+s.title;
- $("artA").textContent=s.a;
- $("artB").textContent=s.b;
+ $("artA").textContent=s.finds[0][0];
+ $("artB").textContent=s.finds[1][0];
 
  scene.className="scene "+(s.theme==="sunset"?"sunset":s.theme==="night"?"night":"");
  hotspots.forEach((h,i)=>{
-   h.textContent=[s.a,s.b,s.icon][i];
+   h.textContent=s.finds[i][0];
+   h.dataset.label=s.finds[i][1];
    h.classList.remove("done","hide");
    h.style.pointerEvents="auto";
  });
- target.textContent=s.icon;
  target.classList.remove("done","hard-hide");
- target.style.display="grid";
+ target.style.display="none";
+ memories.forEach((m,i)=>{m.textContent="?";m.classList.remove("found")});
 
  next.classList.remove("show");
- hint.textContent="👆 ¡BUSCÁ 3 COSAS!";
+ hint.textContent="👀 EXPLORÁ · BUSCÁ 3 COSAS";
  companion.textContent=active===6?"🧒❤️":"🧒";
  makeDots();
  updateMenuStatus();
@@ -200,7 +202,13 @@ function confetti(){
 function celebrateFound(i){
  const s=stops[active];
  const messages=["✨ ¡ENCONTRASTE UNA!","⭐ ¡MUY BIEN!","🎉 ¡ENCONTRASTE LAS 3!"];
- hint.textContent=foundCount<3 ? messages[foundCount-1]+" FALTAN "+(3-foundCount) : messages[2];
+ memories[foundCount-1].textContent=s.finds[i][0];
+ memories[foundCount-1].classList.add("found");
+ hint.textContent=foundCount<3 ? messages[foundCount-1]+" · FALTAN "+(3-foundCount) : messages[2];
+ $("toastIcon").textContent=s.finds[i][0];
+ $("toastText").textContent="Encontraste "+s.finds[i][1]+".";
+ toast.classList.add("show");
+ clearTimeout(toastTimer);toastTimer=setTimeout(()=>toast.classList.remove("show"),1100);
  if(navigator.vibrate)try{navigator.vibrate([25,20,35])}catch(e){}
  if(foundCount===1)speak("¡Encontraste una!");
  if(foundCount===2)speak("¡Muy bien! Falta una.");
@@ -220,7 +228,6 @@ function discoverHotspot(i){
 
 function finishDiscovery(s){
  discovered=true;
- target.classList.add("done");
  hotspots.forEach(h=>{h.classList.add("done");h.style.pointerEvents="none";});
  hint.textContent="🎉 ¡ENCONTRASTE TODO!";
  next.classList.add("show");
@@ -247,11 +254,10 @@ function advance(){
    return;
  }
  render();
- speak("Nueva parada. Buscá tres cosas y tocá cada una.");
+ speak("Nueva parada. Mirá la escena, buscá tres cosas y tocá cada una.");
 }
 
 hotspots.forEach((h,i)=>h.addEventListener("click",()=>discoverHotspot(i)));
-target.addEventListener("click",()=>discoverHotspot(2));
 next.addEventListener("click",advance);
 
 $("menuBtn").addEventListener("click",openMenu);
@@ -270,7 +276,7 @@ document.querySelectorAll(".level").forEach(btn=>btn.addEventListener("click",()
 
 $("play").addEventListener("click",()=>{
  $("start").style.display="none";render();
- speak("Mirá la escena. Buscá tres cosas y tocá cada una.");
+ speak("Mirá la escena. Explorá y buscá tres cosas de Picún.");
 });
 
 $("restart").addEventListener("click",()=>{
