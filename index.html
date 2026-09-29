@@ -200,7 +200,7 @@ function confetti(){
 function celebrateFound(i){
  const s=stops[active];
  const messages=["✨ ¡ENCONTRASTE UNA!","⭐ ¡MUY BIEN!","🎉 ¡ENCONTRASTE LAS 3!"];
- hint.textContent=foundCount<3 ? messages[foundCount-1]+" FALTAN "+(3-foundCount : messages[2];
+ hint.textContent=foundCount<3 ? messages[foundCount-1]+" FALTAN "+(3-foundCount) : messages[2];
  if(navigator.vibrate)try{navigator.vibrate([25,20,35])}catch(e){}
  if(foundCount===1)speak("¡Encontraste una!");
  if(foundCount===2)speak("¡Muy bien! Falta una.");
