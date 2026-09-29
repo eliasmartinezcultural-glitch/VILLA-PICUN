@@ -4,123 +4,90 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
 <meta name="theme-color" content="#183b4b">
-<title>Villa Picún — Recorrido histórico</title>
+<title>Villa Picún — Un viaje para descubrir</title>
 <style>
-:root{--ink:#183b4b;--paper:#fff9ea;--sun:#ffd35c;--water:#55b8cf;--sky:#b7e7ef;--earth:#c99b5e;--green:#698a61;--white:#fff;--shadow:0 7px 0 #183b4b26}
+:root{--ink:#183b4b;--paper:#fff9ea;--sun:#ffd35c;--sky:#b7e7ef;--water:#55b8cf;--earth:#c99b5e;--green:#698a61;--white:#fff}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html,body{margin:0;min-height:100%;font-family:system-ui,-apple-system,Segoe UI,sans-serif;background:var(--ink);color:var(--ink)}
 button{font:inherit;touch-action:manipulation}
-button:focus-visible{outline:4px solid var(--sun);outline-offset:2px}
+button:focus-visible{outline:5px solid var(--sun);outline-offset:3px}
 .app{min-height:100vh;display:flex;flex-direction:column}
-.top{height:62px;padding:8px 12px;background:var(--ink);color:#fff;display:flex;align-items:center;justify-content:space-between;z-index:100}
-.brand{font-size:clamp(19px,5vw,28px);font-weight:1000;letter-spacing:-1px}.brand b{color:var(--sun)}
-.topActions{display:flex;gap:7px;align-items:center}.counter{font-weight:1000;background:#fff;color:var(--ink);border:3px solid var(--sun);border-radius:999px;padding:6px 10px}
-.icon{width:44px;height:44px;border:3px solid var(--sun);border-radius:13px;background:#fff;color:var(--ink);font-size:21px;font-weight:1000}
+.top{height:62px;padding:8px 12px;background:var(--ink);color:#fff;display:flex;align-items:center;justify-content:space-between}
+.brand{font-size:clamp(20px,6vw,30px);font-weight:1000;letter-spacing:-1px}.brand b{color:var(--sun)}
+.progress{display:flex;align-items:center;gap:7px}.progress i{width:30px;height:30px;border:3px solid var(--sun);border-radius:50%;display:grid;place-items:center;background:#fff;color:var(--ink);font-style:normal;font-weight:1000}
 .game{position:relative;flex:1;min-height:680px;overflow:hidden;background:var(--sky)}
-.scene{position:absolute;inset:0;overflow:hidden;background:linear-gradient(#b7e7ef 0 52%,#d9b574 52% 72%,#55b8cf 72%);transition:background .4s}
-.scene:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 82% 13%,#ffd35c 0 34px,transparent 36px);pointer-events:none}
-.scene.sunset{background:linear-gradient(#f5b68d 0 52%,#c99b5e 52% 72%,#438da1 72%)}.scene.night{background:linear-gradient(#27485f 0 52%,#806347 52% 72%,#316b7a 72%)}.scene.night:before{background:radial-gradient(circle at 82% 13%,#fff4bd 0 25px,transparent 27px)}
-.hill{position:absolute;left:-10%;right:-10%;bottom:27%;height:28%;background:var(--green);border-radius:55% 55% 0 0}.hill.back{left:40%;bottom:30%;height:22%;background:#56775e;transform:rotate(3deg)}
-.water{position:absolute;left:0;right:0;bottom:0;height:28%;background:var(--water);border-top:4px solid #ffffff55}.road{position:absolute;bottom:19%;left:43%;width:18%;height:46%;background:#d0a764;transform:skew(-12deg);border-radius:50% 50% 0 0}
-.sign{position:absolute;left:6%;bottom:32%;z-index:4;background:var(--paper);border:4px solid var(--ink);padding:7px 10px;border-radius:12px;font-weight:1000;box-shadow:var(--shadow)}
-.art{position:absolute;z-index:5;font-size:clamp(38px,10vw,58px);pointer-events:none}.art.a{left:13%;bottom:34%}.art.b{right:14%;bottom:35%}
-.titleCard{position:absolute;z-index:20;left:50%;top:12px;transform:translateX(-50%);width:min(92%,720px);background:#fffdf4f2;border:4px solid var(--ink);border-radius:18px;padding:9px 12px;box-shadow:var(--shadow)}
-.chapter{display:flex;align-items:center;gap:8px}.number{background:var(--ink);color:#fff;border-radius:9px;padding:3px 8px;font-weight:1000}.chapter strong{font-size:clamp(15px,4vw,20px)}.place{font-size:11px;font-weight:800;opacity:.7}.goal{font-size:13px;font-weight:800;margin-top:2px}
-.bar{height:7px;background:#dbe6e0;border-radius:99px;margin-top:6px;overflow:hidden}.bar i{display:block;height:100%;width:0;background:var(--sun);transition:.4s}
-.path{position:absolute;z-index:8;left:50%;bottom:25%;width:5px;height:38%;background:#fff8;transform:translateX(-50%);border-radius:99px;pointer-events:none}
-.point{position:absolute;z-index:25;width:74px;height:74px;border:4px solid var(--ink);border-radius:50%;background:#fff;color:var(--ink);box-shadow:var(--shadow);font-size:27px;font-weight:1000;cursor:pointer;display:grid;place-items:center}.point small{position:absolute;top:78px;white-space:nowrap;font-size:10px;background:#fffdf4;border:2px solid var(--ink);border-radius:8px;padding:3px 6px}.p1{left:8%;bottom:40%}.p2{left:50%;bottom:47%;transform:translateX(-50%)}.p3{right:8%;bottom:40%}
-.hero{position:absolute;z-index:28;left:50%;bottom:26%;transform:translateX(-50%);width:82px;height:112px;cursor:pointer;filter:drop-shadow(0 6px 0 #183b4b22)}.head{position:absolute;left:20px;top:4px;width:43px;height:43px;border:4px solid var(--ink);border-radius:50%;background:#d89a68}.hair{position:absolute;left:20px;top:2px;width:43px;height:20px;border:4px solid var(--ink);border-radius:50% 50% 30% 30%;background:#4e382f;z-index:2}.body{position:absolute;left:11px;top:48px;width:60px;height:50px;border:4px solid var(--ink);border-radius:20px;background:#c76e58}.leg{position:absolute;bottom:0;width:16px;height:32px;border:3px solid var(--ink);border-radius:9px;background:#384957}.leg.l{left:23px}.leg.r{right:23px}
-.bottom{position:absolute;z-index:60;left:50%;bottom:10px;transform:translateX(-50%);width:min(94%,760px);display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.bottom button{min-height:58px;border:4px solid var(--ink);border-radius:16px;background:#fff;color:var(--ink);font-weight:1000;box-shadow:var(--shadow);cursor:pointer}.bottom button small{display:block;font-size:10px;opacity:.65}.bottom .mainAction{background:var(--sun)}
-.panel{position:absolute;z-index:80;left:50%;top:12%;transform:translateX(-50%);width:min(92%,650px);max-height:72%;overflow:auto;background:#fffdf5;border:4px solid var(--ink);border-radius:22px;padding:16px;box-shadow:0 14px 0 #183b4b33;display:none}.panel.show{display:block;animation:pop .18s}.panel h1{font-size:clamp(21px,6vw,30px);margin:0 0 6px}.panel p{margin:0;font-weight:650;line-height:1.4}.fact{margin-top:10px;padding:10px;background:#fff0bd;border:3px dashed var(--ink);border-radius:13px;font-size:13px;font-weight:800}.panelBtn{width:100%;min-height:48px;margin-top:11px;border:3px solid var(--ink);border-radius:14px;background:var(--sun);font-weight:1000;cursor:pointer}
-.menu{position:absolute;z-index:120;inset:0;background:#183b4bf5;display:none;padding:62px 12px 15px;overflow:auto}.menu.show{display:block}.menuBox{width:min(94%,650px);margin:auto;background:var(--paper);border:4px solid var(--ink);border-radius:23px;padding:16px;box-shadow:0 14px #0003}.menuBox h1{margin:0}.menuGrid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}.menuGrid button,.settingsGrid button{min-height:64px;border:3px solid var(--ink);border-radius:14px;background:#fff;font-weight:1000;cursor:pointer}.menuGrid small,.settingsGrid small{display:block;font-size:10px;font-weight:700;opacity:.65}.settings{border-top:3px solid #183b4b22;margin-top:13px;padding-top:11px}.settings h2{font-size:15px;margin:0 0 7px}.settingsGrid{display:grid;grid-template-columns:1fr 1fr;gap:8px}.danger{background:#ffe1d8!important}.close{width:100%;min-height:48px;margin-top:10px;border:3px solid var(--ink);border-radius:14px;background:var(--sun);font-weight:1000}
-.start{position:absolute;z-index:200;inset:0;background:linear-gradient(#b7e7ef,#fff0b5 60%,#55b8cf);display:flex;align-items:center;justify-content:center;padding:16px}.startBox{width:min(94%,650px);text-align:center;background:#fffdf5;border:5px solid var(--ink);border-radius:27px;padding:23px 17px;box-shadow:0 14px #183b4b33}.logo{font-size:clamp(35px,11vw,66px);font-weight:1000;letter-spacing:-3px}.logo b{color:#c76e58}.startBox h2{margin:3px 0 8px}.startBox p{font-weight:700;line-height:1.4}.startBtn{width:100%;min-height:56px;border:4px solid var(--ink);border-radius:16px;background:var(--sun);font-weight:1000;font-size:18px;cursor:pointer}.startBtn.alt{margin-top:8px;background:#fff}
-.toast{position:absolute;z-index:150;left:50%;bottom:82px;transform:translateX(-50%);background:var(--paper);border:3px solid var(--ink);border-radius:14px;padding:8px 12px;font-weight:1000;display:none;white-space:nowrap}
-.cards{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:10px}.card{border:3px solid var(--ink);border-radius:12px;padding:9px;background:#fff;font-size:23px}.card b,.card small{display:block;font-size:11px}.locked{opacity:.4}
-body.simple *{animation:none!important;transition:none!important}.simple .shadow{box-shadow:none}
-@keyframes pop{from{transform:translateX(-50%) scale(.94);opacity:0}to{transform:translateX(-50%) scale(1);opacity:1}}
-@media(max-width:620px){.game{min-height:650px}.titleCard{top:7px}.point{width:64px;height:64px}.point small{top:67px}.hero{bottom:28%;transform:translateX(-50%) scale(.9)}.bottom{grid-template-columns:1fr 1fr}.bottom button:last-child{grid-column:1/-1}.menuGrid,.settingsGrid{grid-template-columns:1fr 1fr}}
-@media(max-width:380px){.titleCard{padding:7px 9px}.goal{font-size:12px}.point{width:58px;height:58px;font-size:23px}.point small{top:61px}.bottom button{min-height:53px;font-size:13px}}
+.scene{position:absolute;inset:0;overflow:hidden;background:linear-gradient(#b7e7ef 0 51%,#d9b574 51% 72%,#55b8cf 72%);transition:background .35s}
+.scene:before{content:"";position:absolute;right:11%;top:9%;width:64px;height:64px;border-radius:50%;background:var(--sun)}
+.scene.sunset{background:linear-gradient(#f2ad88 0 51%,#c99b5e 51% 72%,#438da1 72%)}.scene.sunset:before{background:#ffe0a0}
+.scene.night{background:linear-gradient(#294a60 0 51%,#806347 51% 72%,#316b7a 72%)}.scene.night:before{background:#fff4bd;width:42px;height:42px}
+.hill{position:absolute;left:-12%;right:-12%;bottom:27%;height:28%;background:var(--green);border-radius:55% 55% 0 0}.hill.back{left:38%;bottom:31%;height:22%;background:#56775e;transform:rotate(3deg)}
+.water{position:absolute;left:0;right:0;bottom:0;height:28%;background:var(--water);border-top:4px solid #ffffff66}
+.road{position:absolute;bottom:19%;left:43%;width:18%;height:46%;background:#d0a764;transform:skew(-12deg);border-radius:50% 50% 0 0}
+.sign{position:absolute;left:5%;bottom:32%;z-index:3;background:var(--paper);border:4px solid var(--ink);padding:6px 9px;border-radius:12px;font-weight:1000;font-size:13px}
+.art{position:absolute;z-index:5;font-size:clamp(42px,12vw,70px);pointer-events:none}.art.a{left:12%;bottom:35%}.art.b{right:12%;bottom:36%}
+.title{position:absolute;z-index:20;left:50%;top:12px;transform:translateX(-50%);width:min(92%,650px);text-align:center;background:#fffdf4ee;border:4px solid var(--ink);border-radius:20px;padding:8px 12px}
+.title .chapter{font-size:11px;font-weight:1000;opacity:.65}.title strong{display:block;font-size:clamp(20px,6vw,30px);line-height:1.05}
+.target{position:absolute;z-index:30;left:50%;bottom:35%;transform:translateX(-50%);width:126px;height:126px;border:6px solid var(--ink);border-radius:50%;background:#fff;box-shadow:0 10px 0 #183b4b33;display:grid;place-items:center;cursor:pointer;font-size:62px;animation:pulse 1.25s infinite}
+.target:after{content:"";position:absolute;inset:-13px;border:5px solid var(--sun);border-radius:50%;animation:ring 1.25s infinite}
+.target.done{animation:none;background:#dff1d7}.target.done:after{animation:none;border-color:#7aa66b}
+.hint{position:absolute;z-index:31;left:50%;bottom:20%;transform:translateX(-50%);background:var(--sun);border:4px solid var(--ink);border-radius:999px;padding:7px 16px;font-weight:1000;font-size:15px;white-space:nowrap}
+.next{position:absolute;z-index:50;left:50%;bottom:14px;transform:translateX(-50%);width:min(92%,560px);min-height:68px;border:5px solid var(--ink);border-radius:20px;background:var(--sun);color:var(--ink);font-size:20px;font-weight:1000;box-shadow:0 7px 0 #183b4b33;cursor:pointer;display:none}
+.next.show{display:block}
+.next span{display:block;font-size:11px;opacity:.7}
+.start,.finish{position:absolute;z-index:100;inset:0;background:linear-gradient(#b7e7ef,#fff0b5 60%,#55b8cf);display:flex;align-items:center;justify-content:center;padding:16px}
+.box{width:min(94%,620px);text-align:center;background:#fffdf5;border:5px solid var(--ink);border-radius:28px;padding:25px 18px;box-shadow:0 14px #183b4b33}
+.logo{font-size:clamp(38px,12vw,70px);font-weight:1000;letter-spacing:-4px}.logo b{color:#c76e58}
+.box h1{font-size:clamp(22px,7vw,34px);margin:5px 0 8px}.box p{font-weight:700;line-height:1.35}
+.startBtn{width:100%;min-height:68px;border:5px solid var(--ink);border-radius:18px;background:var(--sun);font-size:23px;font-weight:1000;cursor:pointer}
+.finish{display:none}.finish.show{display:flex}.bigHeart{font-size:76px}.restart{margin-top:10px;background:#fff}
+.toast{position:absolute;z-index:70;left:50%;top:43%;transform:translate(-50%,-50%) scale(.8);background:#fffdf5;border:5px solid var(--ink);border-radius:24px;padding:18px 20px;text-align:center;display:none;box-shadow:0 12px #183b4b33;min-width:min(82%,380px)}
+.toast.show{display:block;animation:pop .35s forwards}.toast b{display:block;font-size:28px}.toast span{font-weight:800}
+footer{background:var(--ink);color:#fff;text-align:center;font-size:10px;padding:7px}
+@keyframes pulse{50%{transform:translateX(-50%) scale(1.07)}}@keyframes ring{50%{transform:scale(1.12);opacity:.35}}@keyframes pop{to{transform:translate(-50%,-50%) scale(1)}}
+@media(max-width:620px){.game{min-height:650px}.target{width:112px;height:112px;font-size:55px}.hint{bottom:19%;font-size:13px}.title{top:7px}.art.a{left:7%}.art.b{right:7%}}
+@media(max-width:380px){.title strong{font-size:22px}.target{width:100px;height:100px;font-size:48px}.hint{bottom:20%;padding:6px 12px}}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 </head>
 <body>
 <main class="app">
-<header class="top"><div class="brand">VILLA <b>PICÚN</b></div><div class="topActions"><div class="counter" id="counter">0 / 7</div><button class="icon" id="menuOpen" aria-label="Menú">☰</button></div></header>
+<header class="top"><div class="brand">VILLA <b>PICÚN</b></div><div class="progress"><i id="step">1</i><span>de 7</span></div></header>
 <section class="game">
 <div class="scene" id="scene">
-<div class="hill"></div><div class="hill back"></div><div class="road"></div><div class="water"></div><div class="path"></div><div class="sign">PICÚN LEUFÚ</div>
-<div class="titleCard"><div class="chapter"><span class="number" id="num">1</span><strong id="title"></strong></div><div class="place" id="place"></div><div class="goal" id="goal"></div><div class="bar"><i id="bar"></i></div></div>
+<div class="hill"></div><div class="hill back"></div><div class="road"></div><div class="water"></div><div class="sign">PICÚN LEUFÚ</div>
+<div class="title"><div class="chapter" id="chapter">PARADA 1</div><strong id="title">💧</strong></div>
 <div class="art a" id="artA"></div><div class="art b" id="artB"></div>
-<div class="point p1" data-point="0"></div><div class="point p2" data-point="1"></div><div class="point p3" data-point="2"></div>
-<div class="hero" id="hero" aria-label="Hablar con el compañero"><div class="hair"></div><div class="head"></div><div class="body"></div><div class="leg l"></div><div class="leg r"></div></div>
-<div class="panel" id="panel"><h1 id="panelTitle"></h1><p id="panelText"></p><div id="panelExtra"></div><button class="panelBtn" id="panelClose">Continuar</button></div>
-<div class="menu" id="menu"><div class="menuBox">
-<h1>🧭 Villa Picún</h1><p>Un recorrido histórico para mirar, tocar y descubrir.</p>
-<div class="menuGrid"><button data-menu="route">🗺️ Recorrido<small>Los 7 capítulos</small></button><button data-menu="album">⭐ Álbum<small>Lo que descubriste</small></button><button data-menu="how">🎮 Cómo jugar<small>Es muy simple</small></button><button data-menu="about">ℹ️ Sobre el juego<small>Qué estás recorriendo</small></button></div>
-<div class="settings"><h2>⚙️ Ajustes</h2><div class="settingsGrid"><button id="restart">↻ Reiniciar<small>Empezar de cero</small></button><button id="sound">🔊 Sonido: ON<small>Toques y avisos</small></button><button id="graphics">🎨 Gráficos: ALTO<small>Animación</small></button><button id="language">🌎 Idioma: ES<small>Interfaz</small></button></div></div>
-<button class="close" id="menuClose">Volver al recorrido</button>
-</div></div>
-<div class="toast" id="toast"></div>
+<button class="target" id="target" aria-label="Tocar para descubrir">💧</button>
+<div class="hint" id="hint">👆 TOCÁ</div>
+<button class="next" id="next"><span>¡DESCUBIERTO!</span>▶ SEGUIR</button>
+<div class="toast" id="toast"><b id="toastIcon">✨</b><span id="toastText"></span></div>
+<div class="start" id="start"><div class="box"><div class="logo">VILLA <b>PICÚN</b></div><h1>Un viaje para descubrir</h1><p style="font-size:22px">👀 Mirá<br>👆 Tocá<br>➡️ SeguÍ</p><p>No hace falta saber leer. Solo hay que mirar y tocar.</p><button class="startBtn" id="play">▶ EMPEZAR</button></div></div>
+<div class="finish" id="finish"><div class="box"><div class="bigHeart">❤️</div><h1>¡Llegaste!</h1><p style="font-size:20px">Recorriste Villa Picún.</p><p>Ahora la historia sigue afuera: mirando, preguntando y cuidando nuestro lugar.</p><button class="startBtn restart" id="restart">↻ VOLVER A JUGAR</button></div></div>
 </div>
-<nav class="bottom"><button id="back">‹<small>Capítulo</small>Anterior</button><button class="mainAction" id="continueBtn">▶<small>Una acción</small>Continuar</button><button id="menuBottom">☰<small>Ajustes</small>Menú</button></nav>
-<div class="start" id="start"><div class="startBox"><div class="logo">VILLA <b>PICÚN</b></div><h2>Un recorrido histórico para jugar</h2><p>No hay vidas, puntos difíciles ni controles complicados.<br><b>Mirás · tocás · descubrís · avanzás.</b></p><button class="startBtn" id="play">▶ COMENZAR</button><button class="startBtn alt" id="continue" style="display:none">↻ CONTINUAR</button></div></div>
 </section>
-<footer>Villa Picún · recorrido familiar por territorio, memoria y patrimonio</footer>
+<footer>Una aventura para mirar y descubrir Picún Leufú</footer>
 </main>
 <script>
-const missions=[
-{t:"Seguir el agua",p:"El arroyo Picún Leufú",g:"Encontrá el comienzo de nuestra historia.",theme:"day",a:["💧","🌿"],intro:"El viaje empieza por el agua. Caminamos y miramos el territorio.",fact:"Picún Leufú se encuentra junto a la desembocadura del arroyo homónimo y sobre la ribera del embalse Ezequiel Ramos Mexía.",spots:[["💧","Agua","Mirá el comienzo"],["🌿","Paisaje","Observá alrededor"],["👋","Compañero","Escuchá una pista"]]},
-{t:"La vida que alimenta al pueblo",p:"Chacras y trabajo",g:"Descubrí cómo se encuentran agua, tierra y trabajo.",theme:"field",a:["🌾","🌳"],intro:"Seguimos hacia las chacras. La historia también está en la tierra y en quienes la trabajan.",fact:"Documentación provincial describe actividad agrícola y ganadera y sectores periurbanos próximos al arroyo.",spots:[["🌾","Chacra","Mirá la producción"],["🌳","Álamos","Encontrá los árboles"],["🧺","Cosecha","Guardá el recuerdo"]]},
-{t:"Cuando el pueblo tuvo que cambiar",p:"El antiguo y el nuevo asentamiento",g:"Uní las piezas para entender el cambio.",theme:"sunset",a:["🏘️","🌊"],intro:"Miramos el pasado del pueblo y su relación con el embalse.",fact:"El nuevo asentamiento de Picún Leufú fue inaugurado en 1971. Los detalles históricos del traslado deben presentarse con fuentes locales validadas.",spots:[["🏚️","Antes","Imaginá el pasado"],["🌊","Embalse","Mirá el cambio"],["🏘️","1971","Llegá al nuevo pueblo"]]},
-{t:"Mucho antes de nosotros",p:"Huellas y tiempo profundo",g:"Viajá mucho más atrás en el tiempo.",theme:"night",a:["👣","🦴"],intro:"Antes de las casas y las chacras, el territorio ya guardaba otras historias.",fact:"El departamento Picún Leufú posee sitios de interés paleontológico; El Sauce está reconocido legalmente como zona protegida.",spots:[["👣","Huellas","Buscá una señal"],["🦴","Pasado","Observá con cuidado"],["🔎","Explorar","Guardá el hallazgo"]]},
-{t:"El tesoro de El Sauce",p:"Bosque Petrificado El Sauce",g:"Descubrí un patrimonio que hay que cuidar.",theme:"field",a:["🌲","🪵"],intro:"No venimos a llevarnos nada: venimos a mirar, aprender y cuidar.",fact:"La Ley provincial 3392 declaró patrimonio cultural e histórico al Bosque Petrificado El Sauce y estableció una zona paleontológica protegida.",spots:[["🌲","El Sauce","Entrá al capítulo"],["🪵","Piedra y tiempo","Observá"],["🛡️","Cuidar","Protegé el lugar"]]},
-{t:"El pueblo se encuentra",p:"Fiesta del Chacarero y el Hombre de Campo",g:"Viví un encuentro de trabajo, tradición y comunidad.",theme:"sunset",a:["🐎","🎶"],intro:"Llegamos al encuentro. Campo, trabajo, música, productores y tradiciones.",fact:"En 2026 la Fiesta del Chacarero y el Hombre de Campo de Picún Leufú fue declarada Fiesta Provincial.",spots:[["🐎","Campo","Prepará el encuentro"],["🎶","Música","Sumá una tradición"],["🧺","Productores","Compartí"]]},
-{t:"Nuestra historia",p:"El álbum de Picún Leufú",g:"Uní todo lo que descubriste.",theme:"day",a:["❤️","📖"],intro:"Agua, trabajo, cambio, pasado, patrimonio y encuentro forman un mismo recorrido.",fact:"El juego no pretende cerrar la historia real: invita a seguir conociendo, contando y cuidando Picún Leufú.",spots:[["📖","Álbum","Mirá tus recuerdos"],["❤️","Memoria","Elegí uno"],["🏁","Final","Terminá el recorrido"]]}
+const stops=[
+{icon:"💧",title:"El agua",theme:"day",a:"🌿",b:"💦",voice:"El agua. El arroyo Picún Leufú. Acá empieza nuestro viaje.",fact:"El arroyo y el embalse forman parte del paisaje de Picún Leufú."},
+{icon:"🌾",title:"La tierra",theme:"field",a:"🌳",b:"🧺",voice:"La tierra. Las chacras, los árboles y el trabajo.",fact:"La actividad agrícola y ganadera forma parte de la historia local."},
+{icon:"🏘️",title:"El pueblo",theme:"sunset",a:"🏚️",b:"🌊",voice:"El pueblo cambió. Hubo un antiguo asentamiento y un nuevo pueblo.",fact:"El nuevo asentamiento fue inaugurado en 1971."},
+{icon:"👣",title:"El pasado",theme:"night",a:"🦴",b:"🔎",voice:"Mucho antes de nosotros. El territorio guarda huellas de otros tiempos.",fact:"El departamento tiene sitios de interés paleontológico."},
+{icon:"🌲",title:"El Sauce",theme:"field",a:"🪵",b:"🛡️",voice:"El Sauce. Un lugar de mucho tiempo que tenemos que cuidar.",fact:"El Bosque Petrificado El Sauce es patrimonio cultural e histórico provincial."},
+{icon:"🐎",title:"La fiesta",theme:"sunset",a:"🎶",b:"🧺",voice:"El campo, la música, el trabajo y la comunidad se encuentran.",fact:"En 2026 la Fiesta del Chacarero y el Hombre de Campo fue declarada Fiesta Provincial."},
+{icon:"❤️",title:"Nuestra historia",theme:"day",a:"📖",b:"🏁",voice:"Llegamos al final. Agua, tierra, pueblo, pasado, patrimonio y comunidad.",fact:"La historia continúa cada vez que una persona conoce y cuenta su lugar."}
 ];
-let saved=JSON.parse(localStorage.getItem("villaPicunGame")||'{"mission":1,"done":[]}');let active=Math.min(7,Math.max(1,saved.mission||1));let done=new Set(saved.done||[]);let discovered=new Set();
-let settings=JSON.parse(localStorage.getItem("villaPicunSettings")||'{"sound":true,"simple":false,"language":"es"}');
-const scene=document.getElementById("scene"),panel=document.getElementById("panel"),menu=document.getElementById("menu"),toast=document.getElementById("toast");
-let audio=null;
-function save(){localStorage.setItem("villaPicunGame",JSON.stringify({mission:active,done:[...done]}))}
-function saveSettings(){localStorage.setItem("villaPicunSettings",JSON.stringify(settings))}
-function beep(f=500,d=.06){if(!settings.sound)return;try{const C=window.AudioContext||window.webkitAudioContext;if(!C)return;audio=audio||new C;if(audio.state==="suspended")audio.resume();let o=audio.createOscillator(),g=audio.createGain();o.frequency.value=f;o.type="sine";g.gain.setValueAtTime(.025,audio.currentTime);g.gain.exponentialRampToValueAtTime(.001,audio.currentTime+d);o.connect(g);g.connect(audio.destination);o.start();o.stop(audio.currentTime+d)}catch(e){}}
-function update(){
- discovered=new Set();const x=missions[active-1];document.getElementById("num").textContent=active;document.getElementById("title").textContent=x.t;document.getElementById("place").textContent=x.p;document.getElementById("goal").textContent=x.g;document.getElementById("bar").style.width=(done.size/7*100)+"%";document.getElementById("counter").textContent=done.size+" / 7";
- scene.className="scene "+(x.theme==="night"?"night":x.theme==="sunset"?"sunset":"");document.getElementById("artA").textContent=x.a[0];document.getElementById("artB").textContent=x.a[1];
- document.querySelectorAll(".point").forEach((el,i)=>{el.innerHTML=x.spots[i][0]+'<small>'+x.spots[i][1]+'</small>';el.onclick=()=>point(i)});document.getElementById("continueBtn").innerHTML="▶<small>"+(discovered.size===3?"Avanzar":"Explorar")+"</small>"+(discovered.size===3?"Continuar":"Mirar");
- save();
-}
-function show(title,text,extra=""){document.getElementById("panelTitle").textContent=title;document.getElementById("panelText").textContent=text;document.getElementById("panelExtra").innerHTML=extra?'<div class="fact">'+extra+"</div>":"";panel.classList.add("show")}
-function closePanel(){panel.classList.remove("show")}
-document.getElementById("panelClose").onclick=()=>{closePanel();beep(600)};
-function point(i){const x=missions[active-1],s=x.spots[i];discovered.add(i);document.getElementById("continueBtn").innerHTML="▶<small>"+(discovered.size===3?"Avanzar":"Explorar")+"</small>"+(discovered.size===3?"Continuar":"Mirar");beep(620);show(s[0]+" "+s[1],s[2]+". "+x.intro,x.fact)}
-function companion(){beep(700);show("👋 Compañero","No hace falta memorizar nada. Mirá el lugar, tocá los tres puntos y seguí el recorrido.","La historia aparece de a poco.")}
-function continueTour(){
- const x=missions[active-1];beep(560);
- if(discovered.size<3){show("👀 Explorá un poquito más","Tocá los tres círculos del paisaje. Cuando los hayas descubierto, el botón amarillo te permitirá avanzar.","Ya descubriste "+discovered.size+" de 3 puntos.");return}
- show(active===7?"🏁 Llegaste al final":"📍 "+x.t,"Ya descubriste los tres puntos de este capítulo. Ahora podés avanzar.",x.fact);
-}
-function completeChapter(){
- if(!done.has(active)){done.add(active);save();beep(850,.12);toast.textContent=active===7?"❤️ Recorrido completo":"✓ Capítulo descubierto";toast.style.display="block";setTimeout(()=>toast.style.display="none",1300)}
- if(active<7){active++;save();update();show("➡️ Seguimos", "El recorrido continúa en "+missions[active-1].t+".","No necesitás hacer nada complicado: simplemente explorá el nuevo lugar.")}else show("🏁 Fin del recorrido","Recorriste los siete capítulos de Villa Picún.","La historia real continúa fuera del juego.")}
-document.getElementById("continueBtn").onclick=()=>{if(panel.classList.contains("show")){closePanel();if(discovered.size===3)completeChapter();else continueTour()}else continueTour()};
-document.getElementById("hero").onclick=companion;
-document.getElementById("back").onclick=()=>{if(active>1){active--;save();update();beep(430);show("‹ Capítulo anterior",missions[active-1].t,"Podés volver a recorrerlo cuando quieras.")}else show("Primer capítulo","Este es el comienzo del recorrido.")};
-function route(){let html=missions.map((x,i)=>'<div class="card '+(done.has(i+1)?"":"locked")+'">'+x.a[0]+'<b>'+((i+1)+". "+x.t)+'</b><small>'+(done.has(i+1)?"✓ Descubierto":i+1===active?"▶ Estás acá":"🔒 Seguí el recorrido")+"</small></div>").join("");show("🗺️ Recorrido","Siete capítulos, una sola historia.",'<div class="cards">'+html+"</div>")}
-function album(){let html=missions.map((x,i)=>'<div class="card '+(done.has(i+1)?"":"locked")+'">'+(done.has(i+1)?x.a[0]:"🔒")+'<b>'+x.t+'</b><small>'+(done.has(i+1)?x.p:"Todavía no")+"</small></div>").join("");show("⭐ Álbum","Cada capítulo deja un recuerdo.",'<div class="cards">'+html+"</div>")}
-function how(){show("🎮 Cómo jugar","Es un recorrido histórico interactivo. Tocá los tres círculos del paisaje, hablá con el compañero y usá el botón amarillo para avanzar.","No hay vidas ni castigos. Si te equivocás, simplemente probás otra vez.")}
-function about(){show("ℹ️ Sobre Villa Picún","Una experiencia infantil y familiar para acercarse a Picún Leufú mediante paisaje, memoria, patrimonio y comunidad.","El juego diferencia los datos históricos de las partes narrativas inventadas.")}
-document.querySelectorAll("[data-menu]").forEach(b=>b.onclick=()=>{menu.classList.remove("show");({route,album,how,about}[b.dataset.menu])()});
-document.getElementById("menuOpen").onclick=()=>{menu.classList.add("show");beep(450)};document.getElementById("menuBottom").onclick=()=>{menu.classList.add("show");beep(450)};document.getElementById("menuClose").onclick=()=>menu.classList.remove("show");
-document.getElementById("restart").onclick=()=>{if(confirm("¿Reiniciar toda la aventura?")){localStorage.removeItem("villaPicunGame");active=1;done=new Set();update();menu.classList.remove("show");document.getElementById("start").style.display="flex";document.getElementById("continue").style.display="none";beep(280,.12)}};
-document.getElementById("sound").onclick=()=>{settings.sound=!settings.sound;saveSettings();applySettings();beep(650)};
-document.getElementById("graphics").onclick=()=>{settings.simple=!settings.simple;saveSettings();applySettings();beep(550)};
-document.getElementById("language").onclick=()=>show("🌎 Idioma","La interfaz está preparada para incorporar más idiomas sin cambiar la estructura del recorrido.","Actualmente: Español.");
-function applySettings(){document.body.classList.toggle("simple",settings.simple);document.getElementById("sound").innerHTML=(settings.sound?"🔊":"🔇")+" Sonido: "+(settings.sound?"ON":"OFF")+"<small>Toques y avisos</small>";document.getElementById("graphics").innerHTML="🎨 Gráficos: "+(settings.simple?"SIMPLE":"ALTO")+"<small>Animación</small>"}applySettings();
-function start(){document.getElementById("start").style.display="none";update();show("📍 Comienza el recorrido",missions[active-1].intro,missions[active-1].fact)}
-document.getElementById("play").onclick=start;document.getElementById("continue").onclick=start;
-if(saved.done.length||saved.mission>1){document.getElementById("continue").style.display="block";document.getElementById("play").textContent="▶ NUEVA AVENTURA"}
-update();
+let active=0,discovered=false;
+const scene=document.getElementById("scene"),target=document.getElementById("target"),next=document.getElementById("next"),hint=document.getElementById("hint"),toast=document.getElementById("toast");
+let started=false;
+function speak(text){if(!("speechSynthesis" in window))return;try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(text);u.lang="es-AR";u.rate=.9;u.pitch=1;speechSynthesis.speak(u)}catch(e){}}
+function render(){const s=stops[active];document.getElementById("step").textContent=active+1;document.getElementById("chapter").textContent="PARADA "+(active+1)+" · 7";document.getElementById("title").textContent=s.icon+" "+s.title;document.getElementById("artA").textContent=s.a;document.getElementById("artB").textContent=s.b;scene.className="scene "+(s.theme==="sunset"?"sunset":s.theme==="night"?"night":"");target.textContent=s.icon;target.classList.remove("done");target.style.display="grid";next.classList.remove("show");hint.textContent="👆 TOCÁ";discovered=false}
+function discover(){if(discovered)return;discovered=true;const s=stops[active];target.classList.add("done");hint.textContent="✨ ¡LO ENCONTRASTE!";next.classList.add("show");document.getElementById("toastIcon").textContent=s.icon;document.getElementById("toastText").textContent=s.fact;toast.classList.add("show");setTimeout(()=>toast.classList.remove("show"),1900);speak(s.voice);if(navigator.vibrate)try{navigator.vibrate(50)}catch(e){}}
+function advance(){if(!discovered){discover();return}active++;if(active>=stops.length){document.getElementById("finish").classList.add("show");speak("Llegaste al final del recorrido de Villa Picún.");return}render();speak("Nueva parada. Mirá y tocá el objeto.");}
+target.addEventListener("click",discover);next.addEventListener("click",advance);
+document.getElementById("play").addEventListener("click",()=>{started=true;document.getElementById("start").style.display="none";render();speak("Mirá y tocá el objeto grande.");});
+document.getElementById("restart").addEventListener("click",()=>{active=0;document.getElementById("finish").classList.remove("show");render();speak("Empezamos de nuevo. Mirá y tocá.");});
+render();
 </script>
 </body>
 </html>
