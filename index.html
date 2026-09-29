@@ -3,69 +3,107 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
-<meta name="theme-color" content="#183b4b">
-<title>Villa Picún — Aventura infantil</title>
+<meta name="theme-color" content="#173b52">
+<title>Villa Picún — Una aventura por Picún</title>
 <style>
-:root{--ink:#173b52;--paper:#fffdf3;--sun:#ffd84d;--sky:#9fe4f0;--water:#4fb9d2;--earth:#d7a86a;--green:#76a85e;--pink:#f58c9c;--orange:#f59b54;--purple:#9a87d8;--white:#fff}
+:root{
+ --ink:#173b52;--cream:#fffaf0;--sky:#9ee6f2;--sun:#ffd84d;--green:#73a65d;
+ --water:#4db9d2;--earth:#d6aa70;--pink:#f38da0;--orange:#f39a53;--purple:#9a87d8;
+ --white:#fff;--shadow:0 9px 0 rgba(23,59,82,.16);
+}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-html,body{margin:0;min-height:100%;font-family:system-ui,-apple-system,Segoe UI,sans-serif;background:var(--ink);color:var(--ink)}
-button{font:inherit;touch-action:manipulation}
-button:focus-visible{outline:5px solid var(--sun);outline-offset:3px}
+html,body{margin:0;min-height:100%;font-family:ui-rounded,system-ui,-apple-system,"Segoe UI",sans-serif;background:var(--ink);color:var(--ink)}
+body{overflow-x:hidden}button{font:inherit;touch-action:manipulation}
+button:focus-visible{outline:5px solid var(--sun);outline-offset:4px}
 .app{min-height:100vh;display:flex;flex-direction:column}
-.top{height:62px;padding:8px 12px;background:var(--ink);color:#fff;display:flex;align-items:center;justify-content:space-between}
-.brand{font-size:clamp(20px,6vw,30px);font-weight:1000;letter-spacing:-1px}.brand b{color:var(--sun)}
+.top{height:64px;padding:8px 12px;background:var(--ink);color:#fff;display:flex;align-items:center;justify-content:space-between;gap:10px;position:relative;z-index:200}
+.brand{font-size:clamp(20px,6vw,30px);font-weight:1000;letter-spacing:-1.5px}.brand b{color:var(--sun)}
 .progress{display:flex;align-items:center;gap:7px}.progress i{width:30px;height:30px;border:3px solid var(--sun);border-radius:50%;display:grid;place-items:center;background:#fff;color:var(--ink);font-style:normal;font-weight:1000}
-.game{position:relative;flex:1;min-height:680px;overflow:hidden;background:var(--sky)}
-.scene{position:absolute;inset:0;overflow:hidden;background:linear-gradient(#9fe4f0 0 51%,#d7b878 51% 72%,#4fb9d2 72%);transition:background .35s}
-.scene:before{content:"";position:absolute;right:11%;top:9%;width:72px;height:72px;border-radius:50%;background:var(--sun);box-shadow:0 0 0 10px #fff6,0 0 0 20px #fff3}
-.scene.sunset{background:linear-gradient(#f2ad88 0 51%,#c99b5e 51% 72%,#438da1 72%)}.scene.sunset:before{background:#ffe0a0}
-.scene.night{background:linear-gradient(#294a60 0 51%,#806347 51% 72%,#316b7a 72%)}.scene.night:before{background:#fff4bd;width:42px;height:42px}
-.hill{position:absolute;left:-12%;right:-12%;bottom:27%;height:28%;background:var(--green);border-radius:55% 55% 0 0}.hill.back{left:38%;bottom:31%;height:22%;background:#56775e;transform:rotate(3deg)}
-.water{position:absolute;left:0;right:0;bottom:0;height:28%;background:var(--water);border-top:4px solid #ffffff66}
-.road{position:absolute;bottom:19%;left:43%;width:18%;height:46%;background:#d0a764;transform:skew(-12deg);border-radius:50% 50% 0 0}
-.sign{position:absolute;left:5%;bottom:32%;z-index:3;background:var(--paper);border:4px solid var(--ink);padding:6px 9px;border-radius:12px;font-weight:1000;font-size:13px}
-.art{position:absolute;z-index:5;font-size:clamp(42px,12vw,70px);pointer-events:none}.art.a{left:12%;bottom:35%}.art.b{right:12%;bottom:36%}
-.title{position:absolute;z-index:20;left:50%;top:12px;transform:translateX(-50%) rotate(-1deg);width:min(92%,650px);text-align:center;background:#fffdf8f5;border:5px solid var(--ink);border-radius:24px;padding:9px 14px;box-shadow:0 8px 0 #173b5230}
-.title .chapter{font-size:11px;font-weight:1000;opacity:.65}.title strong{display:block;font-size:clamp(20px,6vw,30px);line-height:1.05}
-.target{position:absolute;z-index:30;left:50%;bottom:35%;transform:translateX(-50%);width:142px;height:142px;border:7px solid var(--ink);border-radius:38% 48% 42% 50%;background:#fff;box-shadow:0 12px 0 #173b5230;display:grid;place-items:center;cursor:pointer;font-size:70px;animation:bob 1.2s infinite}
-.target:after{content:"";position:absolute;inset:-14px;border:6px dashed var(--sun);border-radius:44% 52% 48% 42%;animation:ring 1.25s infinite}
-.target.done{animation:none;background:#e2f4d8;transform:translateX(-50%) rotate(-5deg)}.target.done:after{animation:none;border-color:#79a96a}
-.hint{position:absolute;z-index:31;left:50%;bottom:20%;transform:translateX(-50%) rotate(1deg);background:#fff;border:4px solid var(--ink);border-radius:16px;padding:8px 18px;font-weight:1000;font-size:16px;white-space:nowrap;box-shadow:0 6px 0 #173b5230}
-.next{position:absolute;z-index:50;left:50%;bottom:14px;transform:translateX(-50%);width:min(92%,560px);min-height:74px;border:5px solid var(--ink);border-radius:22px;background:var(--sun);color:var(--ink);font-size:22px;font-weight:1000;box-shadow:0 8px 0 #173b5230;cursor:pointer;display:none}
-.next.show{display:block}
-.next span{display:block;font-size:11px;opacity:.7}
-.start,.finish{position:absolute;z-index:100;inset:0;background:linear-gradient(#b7e7ef,#fff0b5 60%,#55b8cf);display:flex;align-items:center;justify-content:center;padding:16px}
-.box{width:min(94%,620px);text-align:center;background:#fffdf5;border:5px solid var(--ink);border-radius:28px;padding:25px 18px;box-shadow:0 14px #183b4b33}
-.logo{font-size:clamp(38px,12vw,70px);font-weight:1000;letter-spacing:-4px}.logo b{color:#c76e58}
-.box h1{font-size:clamp(22px,7vw,34px);margin:5px 0 8px}.box p{font-weight:700;line-height:1.35}
-.startBtn{width:100%;min-height:68px;border:5px solid var(--ink);border-radius:18px;background:var(--sun);font-size:23px;font-weight:1000;cursor:pointer}
-.finish{display:none}.finish.show{display:flex}.bigHeart{font-size:76px}.restart{margin-top:10px;background:#fff}
-.toast{position:absolute;z-index:70;left:50%;top:43%;transform:translate(-50%,-50%) scale(.8);background:#fffdf5;border:5px solid var(--ink);border-radius:24px;padding:18px 20px;text-align:center;display:none;box-shadow:0 12px #183b4b33;min-width:min(82%,380px)}
-.toast.show{display:block;animation:pop .35s forwards}.toast b{display:block;font-size:28px}.toast span{font-weight:800}
-footer{background:var(--ink);color:#fff;text-align:center;font-size:10px;padding:7px}
-@keyframes bob{50%{transform:translateX(-50%) translateY(-8px) rotate(2deg)}}@keyframes ring{50%{transform:scale(1.08) rotate(4deg);opacity:.35}}@keyframes pop{to{transform:translate(-50%,-50%) scale(1)}}
-@media(max-width:620px){.game{min-height:650px}.target{width:112px;height:112px;font-size:55px}.hint{bottom:19%;font-size:13px}.title{top:7px}.art.a{left:7%}.art.b{right:7%}}
-@media(max-width:380px){.title strong{font-size:22px}.target{width:100px;height:100px;font-size:48px}.hint{bottom:20%;padding:6px 12px}}
+.progressDots{display:flex;gap:4px}.progressDots i{display:block;width:7px;height:7px;border-radius:50%;background:#ffffff45}.progressDots i.on{background:var(--sun);transform:scale(1.25)}
+.game{position:relative;flex:1;min-height:700px;overflow:hidden;background:var(--sky)}
+.scene{position:absolute;inset:0;overflow:hidden;background:linear-gradient(#9ee6f2 0 48%,#d8b878 48% 72%,#4db9d2 72%);isolation:isolate}
+.scene:before{content:"";position:absolute;right:11%;top:8%;width:74px;height:74px;border-radius:50%;background:var(--sun);box-shadow:0 0 0 11px #fff5,0 0 0 22px #fff2}
+.scene.sunset{background:linear-gradient(#f2aa89 0 48%,#c89a60 48% 72%,#438da1 72%)}
+.scene.sunset:before{background:#ffe0a0}
+.scene.night{background:linear-gradient(#294b61 0 48%,#806448 48% 72%,#316b7a 72%)}
+.scene.night:before{background:#fff4bd;width:44px;height:44px}
+.hill{position:absolute;left:-12%;right:-12%;bottom:27%;height:29%;background:var(--green);border-radius:55% 55% 0 0;z-index:1}
+.hill.back{left:34%;bottom:31%;height:23%;background:#5b795e;transform:rotate(3deg);z-index:0}
+.water{position:absolute;left:0;right:0;bottom:0;height:28%;background:var(--water);border-top:4px solid #ffffff66;z-index:2}
+.road{position:absolute;bottom:19%;left:43%;width:18%;height:46%;background:#d0a764;transform:skew(-12deg);border-radius:50% 50% 0 0;z-index:2}
+.scene:after{content:"";position:absolute;left:0;right:0;bottom:27%;height:3px;background:#fff5;z-index:3}
+.sign{position:absolute;left:5%;bottom:33%;z-index:6;background:var(--cream);border:4px solid var(--ink);padding:6px 10px;border-radius:12px;font-weight:1000;font-size:12px;box-shadow:0 5px 0 #173b5230}
+.art{position:absolute;z-index:7;font-size:clamp(42px,12vw,72px);pointer-events:none;filter:drop-shadow(0 5px 0 #173b5230)}
+.art.a{left:10%;bottom:35%;animation:floatA 3s ease-in-out infinite}.art.b{right:10%;bottom:36%;animation:floatB 3.5s ease-in-out infinite}
+.title{position:absolute;z-index:20;left:50%;top:13px;transform:translateX(-50%) rotate(-1deg);width:min(92%,650px);text-align:center;background:#fffdf8f2;border:5px solid var(--ink);border-radius:25px;padding:8px 14px;box-shadow:var(--shadow)}
+.title .chapter{font-size:11px;font-weight:1000;opacity:.62;letter-spacing:.4px}.title strong{display:block;font-size:clamp(21px,6vw,32px);line-height:1.05}
+.target{position:absolute;z-index:30;left:50%;bottom:35%;transform:translateX(-50%);width:150px;height:150px;border:7px solid var(--ink);border-radius:40% 50% 44% 52%;background:#fff;box-shadow:0 13px 0 #173b5230;display:grid;place-items:center;cursor:pointer;font-size:72px;animation:bob 1.15s infinite;transition:transform .18s,background .18s}
+.target:before{content:"";position:absolute;inset:-8px;border:3px solid #fff;border-radius:inherit;opacity:.8}
+.target:after{content:"";position:absolute;inset:-17px;border:6px dashed var(--sun);border-radius:45% 52% 48% 42%;animation:ring 1.2s infinite}
+.target.done{animation:celebrate .45s ease-out forwards;background:#e6f5dc}.target.done:after{animation:none;border-color:#79a96a}
+.hint{position:absolute;z-index:31;left:50%;bottom:20%;transform:translateX(-50%) rotate(1deg);background:#fff;border:4px solid var(--ink);border-radius:17px;padding:8px 18px;font-weight:1000;font-size:16px;white-space:nowrap;box-shadow:0 6px 0 #173b5230}
+.next{position:absolute;z-index:50;left:50%;bottom:13px;transform:translateX(-50%);width:min(92%,560px);min-height:76px;border:5px solid var(--ink);border-radius:23px;background:var(--sun);color:var(--ink);font-size:22px;font-weight:1000;box-shadow:0 8px 0 #173b5230;cursor:pointer;display:none}
+.next.show{display:block;animation:buttonIn .3s ease-out}.next:active,.startBtn:active{transform:translateX(-50%) translateY(4px);box-shadow:0 4px 0 #173b5230}.next span{display:block;font-size:11px;opacity:.7}
+.toast{position:absolute;z-index:80;left:50%;top:44%;transform:translate(-50%,-50%) scale(.75);background:var(--cream);border:5px solid var(--ink);border-radius:25px;padding:17px 20px;text-align:center;display:none;box-shadow:0 12px #183b4b33;min-width:min(84%,400px)}
+.toast.show{display:block;animation:pop .32s forwards}.toast b{display:block;font-size:32px}.toast span{font-weight:800;line-height:1.25}
+.companion{position:absolute;z-index:25;left:50%;bottom:5%;transform:translateX(-50%);font-size:54px;filter:drop-shadow(0 5px 0 #173b5230);pointer-events:none;animation:buddy 2.4s ease-in-out infinite}
+.start,.finish{position:absolute;z-index:100;inset:0;background:linear-gradient(#b8e8ef,#fff0b5 60%,#55b8cf);display:flex;align-items:center;justify-content:center;padding:16px}
+.box{width:min(94%,620px);text-align:center;background:#fffdf5;border:5px solid var(--ink);border-radius:30px;padding:25px 18px;box-shadow:0 14px #183b4b33;position:relative;overflow:hidden}
+.box:before,.box:after{content:"✦";position:absolute;color:var(--sun);font-size:42px;opacity:.8}.box:before{left:14px;top:8px}.box:after{right:14px;bottom:8px}
+.logo{font-size:clamp(40px,12vw,72px);font-weight:1000;letter-spacing:-4px}.logo b{color:#c76e58}
+.mascot{font-size:78px;display:block;animation:buddy 2s ease-in-out infinite}.box h1{font-size:clamp(23px,7vw,36px);margin:3px 0 8px}.box p{font-weight:700;line-height:1.35}
+.steps{display:flex;justify-content:center;gap:10px;margin:15px 0 18px}.steps div{background:#fff;border:3px solid var(--ink);border-radius:15px;padding:8px 10px;font-weight:1000;font-size:12px;box-shadow:0 4px 0 #173b5230}
+.startBtn{width:100%;min-height:70px;border:5px solid var(--ink);border-radius:19px;background:var(--sun);font-size:23px;font-weight:1000;cursor:pointer;box-shadow:0 7px 0 #173b5230}.startBtn:active{transform:translateY(4px);box-shadow:0 3px 0 #173b5230}
+.finish{display:none}.finish.show{display:flex}.bigHeart{font-size:78px;animation:heart 1s ease-in-out infinite}.restart{margin-top:10px;background:#fff}
+.confetti{position:absolute;z-index:75;left:50%;top:43%;pointer-events:none;font-size:25px;animation:burst .8s ease-out forwards}
+footer{background:var(--ink);color:#fff;text-align:center;font-size:10px;padding:7px;letter-spacing:.2px}
+@keyframes bob{50%{transform:translateX(-50%) translateY(-9px) rotate(2deg)}}@keyframes ring{50%{transform:scale(1.09) rotate(4deg);opacity:.35}}
+@keyframes pop{to{transform:translate(-50%,-50%) scale(1)}}@keyframes buttonIn{from{opacity:0;transform:translate(-50%,15px)}to{opacity:1;transform:translate(-50%,0)}}
+@keyframes celebrate{0%{transform:translateX(-50%) scale(1)}45%{transform:translateX(-50%) scale(1.13) rotate(-5deg)}100%{transform:translateX(-50%) scale(1) rotate(-4deg)}}
+@keyframes floatA{50%{transform:translateY(-8px) rotate(-2deg)}}@keyframes floatB{50%{transform:translateY(7px) rotate(2deg)}}
+@keyframes buddy{50%{transform:translateX(-50%) translateY(-8px)}}@keyframes heart{50%{transform:scale(1.12)}}@keyframes burst{to{transform:translate(var(--x),var(--y)) rotate(300deg);opacity:0}}
+@media(max-width:620px){.game{min-height:650px}.target{width:116px;height:116px;font-size:56px}.hint{bottom:19%;font-size:13px}.title{top:7px}.art.a{left:6%}.art.b{right:6%}.companion{font-size:44px}.steps{gap:5px}.steps div{padding:7px 6px;font-size:11px}}
+@media(max-width:380px){.title strong{font-size:22px}.target{width:103px;height:103px;font-size:49px}.hint{bottom:20%;padding:6px 12px}.steps div{font-size:10px}}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 </head>
 <body>
 <main class="app">
-<header class="top"><div class="brand">VILLA <b>PICÚN</b></div><div class="progress"><i id="step">1</i><span>de 7</span></div></header>
+<header class="top">
+<div class="brand">VILLA <b>PICÚN</b></div>
+<div class="progress"><div class="progressDots" id="dots" aria-hidden="true"></div><i id="step">1</i><span>de 7</span></div>
+</header>
 <section class="game">
 <div class="scene" id="scene">
 <div class="hill"></div><div class="hill back"></div><div class="road"></div><div class="water"></div><div class="sign">PICÚN LEUFÚ</div>
-<div class="title"><div class="chapter" id="chapter">🌟 AVENTURA · PARADA 1</div><strong id="title">💧</strong></div>
-<div class="art a" id="artA"></div><div class="art b" id="artB"></div>
-<button class="target" id="target" aria-label="Tocar para descubrir">💧</button>
+<div class="title"><div class="chapter" id="chapter">PARADA 1 · 7</div><strong id="title">💧 El agua</strong></div>
+<div class="art a" id="artA">🌿</div><div class="art b" id="artB">💦</div>
+<div class="companion" id="companion">🧒</div>
+<button class="target" id="target" aria-label="Tocar el dibujo para descubrir">💧</button>
 <div class="hint" id="hint">👆 ¡TOCÁ EL DIBUJO!</div>
 <button class="next" id="next"><span>✨ ¡LO ENCONTRASTE!</span>➡️ SEGUIR AVENTURA</button>
 <div class="toast" id="toast"><b id="toastIcon">✨</b><span id="toastText"></span></div>
-<div class="start" id="start"><div class="box"><div class="logo">VILLA <b>PICÚN</b></div><h1>🌈 Una aventura por Picún</h1><p style="font-size:24px">👀 MIRÁ<br>👆 TOCÁ<br>➡️ SEGUÍ</p><p>No hace falta saber leer. ¡Solo mirar, tocar y descubrir!</p><button class="startBtn" id="play">▶ EMPEZAR</button></div></div>
-<div class="finish" id="finish"><div class="box"><div class="bigHeart">❤️</div><h1>¡Llegaste!</h1><p style="font-size:20px">¡Recorriste Villa Picún!</p><p>Ahora podés seguir mirando, preguntando y cuidando nuestro lugar. 🌱</p><button class="startBtn restart" id="restart">↻ VOLVER A JUGAR</button></div></div>
+<div class="start" id="start">
+<div class="box">
+<span class="mascot">🧒🌈</span>
+<div class="logo">VILLA <b>PICÚN</b></div>
+<h1>Una aventura por Picún</h1>
+<div class="steps"><div>👀 MIRÁ</div><div>👆 TOCÁ</div><div>🎉 DESCUBRÍ</div></div>
+<p>No hace falta saber leer.<br><strong>Solo mirar, tocar y seguir.</strong></p>
+<button class="startBtn" id="play">▶ EMPEZAR AVENTURA</button>
+</div>
+</div>
+<div class="finish" id="finish">
+<div class="box">
+<div class="bigHeart">❤️</div><h1>¡Llegaste!</h1>
+<p style="font-size:21px">¡Recorriste Villa Picún!</p>
+<p>Agua, tierra, pueblo, pasado, patrimonio y comunidad.<br><strong>La historia sigue viva cuando la conocemos y la cuidamos. 🌱</strong></p>
+<button class="startBtn restart" id="restart">↻ VOLVER A JUGAR</button>
+</div>
+</div>
 </div>
 </section>
-<footer>🌈 Mirá · tocá · descubrí · seguí</footer>
+<footer>🌈 MIRÁ · TOCÁ · DESCUBRÍ · SEGUÍ</footer>
 </main>
 <script>
 const stops=[
@@ -78,15 +116,38 @@ const stops=[
 {icon:"❤️",title:"Nuestra historia",theme:"day",a:"📖",b:"🏁",voice:"Llegamos al final. Agua, tierra, pueblo, pasado, patrimonio y comunidad.",fact:"La historia continúa cada vez que una persona conoce y cuenta su lugar."}
 ];
 let active=0,discovered=false;
-const scene=document.getElementById("scene"),target=document.getElementById("target"),next=document.getElementById("next"),hint=document.getElementById("hint"),toast=document.getElementById("toast");
-let started=false;
-function speak(text){if(!("speechSynthesis" in window))return;try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(text);u.lang="es-AR";u.rate=.9;u.pitch=1;speechSynthesis.speak(u)}catch(e){}}
-function render(){const s=stops[active];document.getElementById("step").textContent=active+1;document.getElementById("chapter").textContent="PARADA "+(active+1)+" · 7";document.getElementById("title").textContent=s.icon+" "+s.title;document.getElementById("artA").textContent=s.a;document.getElementById("artB").textContent=s.b;scene.className="scene "+(s.theme==="sunset"?"sunset":s.theme==="night"?"night":"");target.textContent=s.icon;target.classList.remove("done");target.style.display="grid";next.classList.remove("show");hint.textContent="👆 ¡TOCÁ EL DIBUJO!";discovered=false}
-function discover(){if(discovered)return;discovered=true;const s=stops[active];target.classList.add("done");hint.textContent="🎉 ¡MUY BIEN!";next.classList.add("show");document.getElementById("toastIcon").textContent=s.icon;document.getElementById("toastText").textContent=s.fact;toast.classList.add("show");setTimeout(()=>toast.classList.remove("show"),1900);speak(s.voice);if(navigator.vibrate)try{navigator.vibrate(50)}catch(e){}}
-function advance(){if(!discovered){discover();return}active++;if(active>=stops.length){document.getElementById("finish").classList.add("show");speak("¡Llegaste al final del recorrido de Villa Picún!");return}render();speak("Nueva parada. Mirá y tocá el dibujo.");}
-target.addEventListener("click",discover);next.addEventListener("click",advance);
-document.getElementById("play").addEventListener("click",()=>{started=true;document.getElementById("start").style.display="none";render();speak("Mirá y tocá el dibujo grande.");});
-document.getElementById("restart").addEventListener("click",()=>{active=0;document.getElementById("finish").classList.remove("show");render();speak("Empezamos de nuevo. Mirá y tocá.");});
+const $=id=>document.getElementById(id);
+const scene=$("scene"),target=$("target"),next=$("next"),hint=$("hint"),toast=$("toast"),companion=$("companion");
+function speak(text){if(!("speechSynthesis" in window))return;try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(text);u.lang="es-AR";u.rate=.88;u.pitch=1.04;speechSynthesis.speak(u)}catch(e){}}
+function makeDots(){ $("dots").innerHTML=stops.map((_,i)=>'<i class="'+(i===active?"on":"")+'"></i>').join("") }
+function render(){
+ const s=stops[active]; discovered=false;
+ $("step").textContent=active+1; $("chapter").textContent="PARADA "+(active+1)+" · 7";
+ $("title").textContent=s.icon+" "+s.title; $("artA").textContent=s.a; $("artB").textContent=s.b;
+ scene.className="scene "+(s.theme==="sunset"?"sunset":s.theme==="night"?"night":"");
+ target.textContent=s.icon; target.classList.remove("done"); target.style.display="grid";
+ next.classList.remove("show"); hint.textContent="👆 ¡TOCÁ EL DIBUJO!"; companion.textContent=active===6?"🧒❤️":"🧒"; makeDots();
+}
+function confetti(){
+ ["✨","⭐","🎉","💛","🌈","✦"].forEach((v,i)=>{const e=document.createElement("span");e.className="confetti";e.textContent=v;e.style.setProperty("--x",(i%2?1:-1)*(70+i*20)+"px");e.style.setProperty("--y",(-55-i*18)+"px");scene.appendChild(e);setTimeout(()=>e.remove(),900)})
+}
+function discover(){
+ if(discovered)return; discovered=true; const s=stops[active];
+ target.classList.add("done"); hint.textContent="🎉 ¡MUY BIEN!"; next.classList.add("show");
+ $("toastIcon").textContent=s.icon; $("toastText").textContent=s.fact; toast.classList.add("show");
+ setTimeout(()=>toast.classList.remove("show"),2100); speak(s.voice); confetti();
+ companion.textContent=active===6?"🧒❤️":"🧒🎉"; setTimeout(()=>companion.textContent=active===6?"🧒❤️":"🧒",1200);
+ if(navigator.vibrate)try{navigator.vibrate([35,25,55])}catch(e){}
+}
+function advance(){
+ if(!discovered){discover();return}
+ active++;
+ if(active>=stops.length){$("finish").classList.add("show");speak("¡Llegaste al final del recorrido de Villa Picún!");return}
+ render(); speak("Nueva parada. Mirá y tocá el dibujo.");
+}
+target.addEventListener("click",discover); next.addEventListener("click",advance);
+$("play").addEventListener("click",()=>{$("start").style.display="none";render();speak("Mirá el dibujo grande y tocá cuando quieras.");});
+$("restart").addEventListener("click",()=>{active=0;$("finish").classList.remove("show");render();speak("Empezamos de nuevo. Mirá y tocá.");});
 render();
 </script>
 </body>
