@@ -117,48 +117,169 @@ const stops=[
 {icon:"🐎",title:"La fiesta",theme:"sunset",a:"🎶",b:"🧺",voice:"El campo, la música, el trabajo y la comunidad se encuentran.",fact:"En 2026 la Fiesta del Chacarero y el Hombre de Campo fue declarada Fiesta Provincial."},
 {icon:"❤️",title:"Nuestra historia",theme:"day",a:"📖",b:"🏁",voice:"Llegamos al final. Agua, tierra, pueblo, pasado, patrimonio y comunidad.",fact:"La historia continúa cada vez que una persona conoce y cuenta su lugar."}
 ];
-let active=0,discovered=false,mode="normal",hardTimer=null,foundCount=0;
+
+let active=0,discovered=false,mode="normal",hardTimer=null,foundCount=0,toastTimer=null;
 const $=id=>document.getElementById(id);
-const scene=$("scene"),target=$("target"),next=$("next"),hint=$("hint"),toast=$("toast"),companion=$("companion");\nconst hotspots=[$("hot1"),$("hot2"),$("hot3")];
-function applyMode(){document.querySelector(".game").classList.remove("mode-easy","mode-normal","mode-hard");document.querySelector(".game").classList.add("mode-"+mode);document.querySelectorAll(".level").forEach(b=>b.classList.toggle("active",b.dataset.mode===mode));document.querySelectorAll("[data-menu-mode]").forEach(b=>b.classList.toggle("active",b.dataset.menuMode===mode));}
-function speak(text){if(!("speechSynthesis" in window))return;try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(text);u.lang="es-AR";u.rate=.88;u.pitch=1.04;speechSynthesis.speak(u)}catch(e){}}
-function updateMenuStatus(){const names={easy:"TRANQUI",normal:"AVENTURA",hard:"EXPLORADOR"};$("menuStatus").textContent=names[mode]+" · Parada "+(active+1)+" de "+stops.length} 
-function openMenu(){updateMenuStatus();applyMode();$("menuPanel").classList.add("show")} function closeMenu(){$("menuPanel").classList.remove("show")} 
-function makeDots(){ $("dots").innerHTML=stops.map((_,i)=>'<i class="'+(i===active?"on":"")+'"></i>').join("") }
+const scene=$("scene"),target=$("target"),next=$("next"),hint=$("hint"),toast=$("toast"),companion=$("companion");
+const hotspots=[$("hot1"),$("hot2"),$("hot3")];
+
+function applyMode(){
+ const game=document.querySelector(".game");
+ game.classList.remove("mode-easy","mode-normal","mode-hard");
+ game.classList.add("mode-"+mode);
+ document.querySelectorAll(".level").forEach(b=>b.classList.toggle("active",b.dataset.mode===mode));
+ document.querySelectorAll("[data-menu-mode]").forEach(b=>b.classList.toggle("active",b.dataset.menuMode===mode));
+}
+
+function speak(text){
+ if(!("speechSynthesis" in window))return;
+ try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(text);u.lang="es-AR";u.rate=.88;u.pitch=1.04;speechSynthesis.speak(u)}catch(e){}
+}
+
+function updateMenuStatus(){
+ const names={easy:"TRANQUI",normal:"AVENTURA",hard:"EXPLORADOR"};
+ $("menuStatus").textContent=names[mode]+" · Parada "+(active+1)+" de "+stops.length;
+}
+
+function openMenu(){updateMenuStatus();applyMode();$("menuPanel").classList.add("show")}
+function closeMenu(){$("menuPanel").classList.remove("show")}
+function makeDots(){$("dots").innerHTML=stops.map((_,i)=>'<i class="'+(i===active?"on":"")+'"></i>').join("")}
+
+function clearFeedback(){
+ clearTimeout(hardTimer);
+ clearTimeout(toastTimer);
+ toast.classList.remove("show");
+ hotspots.forEach(h=>{h.classList.remove("done");h.style.pointerEvents="auto";});
+}
+
 function render(){
- const s=stops[active]; discovered=false;
- $("step").textContent=active+1; $("chapter").textContent="PARADA "+(active+1)+" · 7";
- $("title").textContent=s.icon+" "+s.title; $("artA").textContent=s.a; $("artB").textContent=s.b;\nfoundCount=0; hotspots.forEach((h,i)=>{h.textContent=[s.a,s.b,s.icon][i];h.classList.remove("done","hide");h.style.pointerEvents="auto";});
+ const s=stops[active];
+ discovered=false;
+ foundCount=0;
+ clearFeedback();
+
+ $("step").textContent=active+1;
+ $("chapter").textContent="PARADA "+(active+1)+" · 7";
+ $("title").textContent=s.icon+" "+s.title;
+ $("artA").textContent=s.a;
+ $("artB").textContent=s.b;
+
  scene.className="scene "+(s.theme==="sunset"?"sunset":s.theme==="night"?"night":"");
- target.textContent=s.icon; target.classList.remove("done","hard-hide"); target.style.display="grid"; clearTimeout(hardTimer); if(mode==="hard"){hardTimer=setTimeout(()=>{if(!discovered)target.classList.add("hard-hide")},4200);}
- next.classList.remove("show"); hint.textContent="👆 ¡BUSCÁ 3 COSAS!"; companion.textContent=active===6?"🧒❤️":"🧒"; makeDots(); updateMenuStatus();
+ hotspots.forEach((h,i)=>{
+   h.textContent=[s.a,s.b,s.icon][i];
+   h.classList.remove("done","hide");
+   h.style.pointerEvents="auto";
+ });
+ target.textContent=s.icon;
+ target.classList.remove("done","hard-hide");
+ target.style.display="grid";
+
+ next.classList.remove("show");
+ hint.textContent="👆 ¡BUSCÁ 3 COSAS!";
+ companion.textContent=active===6?"🧒❤️":"🧒";
+ makeDots();
+ updateMenuStatus();
+
+ if(mode==="hard"){
+   hardTimer=setTimeout(()=>{
+     if(!discovered && foundCount===0) hotspots.forEach(h=>h.classList.add("hide"));
+   },5200);
+ }
 }
+
 function confetti(){
- ["✨","⭐","🎉","💛","🌈","✦"].forEach((v,i)=>{const e=document.createElement("span");e.className="confetti";e.textContent=v;e.style.setProperty("--x",(i%2?1:-1)*(70+i*20)+"px");e.style.setProperty("--y",(-55-i*18)+"px");scene.appendChild(e);setTimeout(()=>e.remove(),900)})
+ ["✨","⭐","🎉","💛","🌈","✦"].forEach((v,i)=>{
+   const e=document.createElement("span");
+   e.className="confetti";e.textContent=v;
+   e.style.setProperty("--x",(i%2?1:-1)*(70+i*20)+"px");
+   e.style.setProperty("--y",(-55-i*18)+"px");
+   scene.appendChild(e);setTimeout(()=>e.remove(),900);
+ });
 }
-function discover(){
- if(discovered)return; clearTimeout(hardTimer); discovered=true; const s=stops[active];
- target.classList.add("done"); hotspots.forEach(h=>h.classList.add("done")); hint.textContent="🎉 ¡ENCONTRASTE TODO!"; next.classList.add("show");
- $("toastIcon").textContent=s.icon; $("toastText").textContent=s.fact; toast.classList.add("show");
- setTimeout(()=>toast.classList.remove("show"),2100); speak(s.voice); confetti();
- companion.textContent=active===6?"🧒❤️":"🧒🎉"; setTimeout(()=>companion.textContent=active===6?"🧒❤️":"🧒",1200);
+
+function celebrateFound(i){
+ const s=stops[active];
+ const messages=["✨ ¡ENCONTRASTE UNA!","⭐ ¡MUY BIEN!","🎉 ¡ENCONTRASTE LAS 3!"];
+ hint.textContent=foundCount<3 ? messages[foundCount-1]+" FALTAN "+(3-foundCount : messages[2];
+ if(navigator.vibrate)try{navigator.vibrate([25,20,35])}catch(e){}
+ if(foundCount===1)speak("¡Encontraste una!");
+ if(foundCount===2)speak("¡Muy bien! Falta una.");
+ if(foundCount===3){speak("¡Encontraste las tres!");finishDiscovery(s);}
+}
+
+function discoverHotspot(i){
+ if(discovered)return;
+ const h=hotspots[i];
+ if(!h || h.classList.contains("done"))return;
+ clearTimeout(hardTimer);
+ h.classList.add("done");
+ h.style.pointerEvents="none";
+ foundCount++;
+ celebrateFound(i);
+}
+
+function finishDiscovery(s){
+ discovered=true;
+ target.classList.add("done");
+ hotspots.forEach(h=>{h.classList.add("done");h.style.pointerEvents="none";});
+ hint.textContent="🎉 ¡ENCONTRASTE TODO!";
+ next.classList.add("show");
+ $("toastIcon").textContent=s.icon;
+ $("toastText").textContent=s.fact;
+ toast.classList.add("show");
+ clearTimeout(toastTimer);
+ toastTimer=setTimeout(()=>toast.classList.remove("show"),2200);
+ confetti();
+ companion.textContent=active===6?"🧒❤️":"🧒🎉";
+ setTimeout(()=>{if(discovered)companion.textContent=active===6?"🧒❤️":"🧒"},1200);
  if(navigator.vibrate)try{navigator.vibrate([35,25,55])}catch(e){}
 }
+
 function advance(){
- if(!discovered){discover();return}
+ if(!discovered){
+   hint.textContent="🔎 TODAVÍA FALTAN "+(3-foundCount);
+   return;
+ }
  active++;
- if(active>=stops.length){$("finish").classList.add("show");speak("¡Llegaste al final del recorrido de Villa Picún!");return}
- render(); speak("Nueva parada. Buscá tres cosas y tocá cada una.");
+ if(active>=stops.length){
+   $("finish").classList.add("show");
+   speak("¡Llegaste al final del recorrido de Villa Picún!");
+   return;
+ }
+ render();
+ speak("Nueva parada. Buscá tres cosas y tocá cada una.");
 }
-target.addEventListener("click",()=>discoverHotspot(2)); hotspots.forEach((h,i)=>h.addEventListener("click",()=>discoverHotspot(i))); next.addEventListener("click",advance);
-$("menuBtn").addEventListener("click",openMenu); $("closeMenu").addEventListener("click",closeMenu); $("continueBtn").addEventListener("click",closeMenu);
-$("restartMenu").addEventListener("click",()=>{active=0;discovered=false;closeMenu();$("finish").classList.remove("show");render();speak("Empezamos de nuevo. Buscá tres cosas y tocá cada una.");});
-$("speakMenu").addEventListener("click",()=>{speak(stops[active].voice);});
-document.querySelectorAll("[data-menu-mode]").forEach(btn=>btn.addEventListener("click",()=>{mode=btn.dataset.menuMode;applyMode();updateMenuStatus();}));
-document.querySelectorAll(".level").forEach(btn=>btn.addEventListener("click",()=>{mode=btn.dataset.mode;applyMode();}));
-$("play").addEventListener("click",()=>{$("start").style.display="none";render();speak("Mirá la escena. Buscá tres cosas y tocá cada una.");});
-$("restart").addEventListener("click",()=>{active=0;$("finish").classList.remove("show");render();speak("Empezamos de nuevo. Buscá tres cosas.");});
-applyMode();render();
+
+hotspots.forEach((h,i)=>h.addEventListener("click",()=>discoverHotspot(i)));
+target.addEventListener("click",()=>discoverHotspot(2));
+next.addEventListener("click",advance);
+
+$("menuBtn").addEventListener("click",openMenu);
+$("closeMenu").addEventListener("click",closeMenu);
+$("continueBtn").addEventListener("click",closeMenu);
+$("restartMenu").addEventListener("click",()=>{
+ active=0; $("finish").classList.remove("show"); closeMenu(); render();
+ speak("Empezamos de nuevo. Buscá tres cosas y tocá cada una.");
+});
+$("speakMenu").addEventListener("click",()=>speak(stops[active].voice));
+
+document.querySelectorAll("[data-menu-mode]").forEach(btn=>btn.addEventListener("click",()=>{
+ mode=btn.dataset.menuMode;applyMode();updateMenuStatus();render();
+}));
+document.querySelectorAll(".level").forEach(btn=>btn.addEventListener("click",()=>{mode=btn.dataset.mode;applyMode()}));
+
+$("play").addEventListener("click",()=>{
+ $("start").style.display="none";render();
+ speak("Mirá la escena. Buscá tres cosas y tocá cada una.");
+});
+
+$("restart").addEventListener("click",()=>{
+ active=0;$("finish").classList.remove("show");render();
+ speak("Empezamos de nuevo. Buscá tres cosas.");
+});
+
+applyMode();
+render();
 </script>
 </body>
 </html>
