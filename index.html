@@ -1,78 +1,60 @@
 <!doctype html>
 <html lang="es">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#143d52">
-<title>Villa Picún — La aventura comienza</title>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#173d50"><title>Villa Picún — Juego familiar</title>
 <style>
-:root{--night:#143d52;--sky:#8ed5e8;--cream:#fff7df;--sand:#e7c98e;--green:#638d61;--deep:#17445b;--water:#4faec7;--yellow:#ffd45c;--white:#fff}
-*{box-sizing:border-box}html,body{margin:0;min-height:100%;font-family:system-ui,-apple-system,Segoe UI,sans-serif;background:var(--night);color:var(--deep)}
-body{overflow-x:hidden}.game{min-height:100vh;display:flex;flex-direction:column}
-.top{height:72px;padding:10px 16px;display:flex;align-items:center;justify-content:space-between;background:var(--night);color:#fff;position:relative;z-index:20}
-.logo{font-weight:1000;letter-spacing:-1px;font-size:clamp(20px,5vw,32px)}.logo span{color:var(--yellow)}
-.score{background:#fff;color:var(--night);border:3px solid var(--yellow);border-radius:999px;padding:7px 13px;font-weight:1000}
-.world{position:relative;flex:1;min-height:680px;overflow:hidden;background:linear-gradient(var(--sky) 0 53%,var(--sand) 53% 72%,var(--water) 72% 100%)}
-.sun{position:absolute;right:9%;top:7%;width:90px;height:90px;border-radius:50%;background:var(--yellow);box-shadow:0 0 0 12px #ffd45c44}
-.mountain{position:absolute;bottom:43%;width:72%;height:29%;background:var(--green);border-radius:50% 50% 0 0/100% 100% 0 0;left:-12%;transform:rotate(-3deg)}
-.mountain.b{left:45%;width:65%;height:25%;background:#557e5a;transform:rotate(4deg)}
-.river{position:absolute;left:0;right:0;bottom:0;height:29%;background:var(--water);border-top:6px solid #dff8fa88}
-.river:after{content:"";position:absolute;left:7%;top:22%;width:20%;height:5px;border-radius:9px;background:#ffffff88;box-shadow:160px 40px #ffffff66,420px 10px #ffffff55}
-.path{position:absolute;left:42%;bottom:22%;width:22%;height:48%;background:#d5ad6d;transform:skew(-11deg);border-radius:50% 50% 0 0}
-.reeds{position:absolute;bottom:27%;width:8px;height:65px;background:#4c704c;border-radius:8px;box-shadow:16px 13px #4c704c,-16px 8px #4c704c}
-.r1{left:16%}.r2{right:15%}
-.hero{position:absolute;z-index:8;left:46%;bottom:29%;width:92px;height:112px;cursor:pointer;animation:bob 1.7s ease-in-out infinite}
-.hero .head{width:55px;height:55px;margin:auto;border-radius:50%;background:#d99b68;border:5px solid #173d50}
-.hero .hat{width:66px;height:18px;background:#e9c15b;border:5px solid #173d50;border-radius:50%;margin-top:-7px;margin-left:13px;position:relative;z-index:2}
-.hero .body{width:62px;height:57px;background:#356f8d;border:5px solid #173d50;border-radius:25px 25px 18px 18px;margin:0 auto}
-.hero .leg{position:absolute;width:16px;height:35px;background:#3e4651;border:4px solid #173d50;border-radius:12px;bottom:0}.l{left:25px}.r{right:25px}
-@keyframes bob{50%{transform:translateY(-9px) rotate(-1deg)}}
-.bubble{position:absolute;z-index:10;left:50%;top:10%;transform:translateX(-50%);width:min(88%,620px);background:#fffdf4;border:4px solid var(--night);border-radius:26px;padding:16px 18px;text-align:center;box-shadow:0 10px 0 #173d5030;display:none}
-.bubble.show{display:block;animation:pop .22s ease-out}.bubble h2{margin:0;font-size:clamp(22px,5vw,32px)}.bubble p{margin:6px 0 0;font-size:clamp(15px,3vw,19px);font-weight:650}
-@keyframes pop{from{transform:translateX(-50%) scale(.8);opacity:0}to{transform:translateX(-50%) scale(1);opacity:1}}
-.actions{position:absolute;z-index:15;left:50%;bottom:25px;transform:translateX(-50%);width:min(94%,720px);display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
-button{font:inherit;font-weight:950;color:var(--night);background:#fff;border:4px solid var(--night);border-radius:20px;padding:13px 8px;min-height:70px;box-shadow:0 6px 0 #173d5044;cursor:pointer}
-button:active{transform:translateY(4px);box-shadow:0 2px 0 #173d5044}
-.card{position:absolute;z-index:16;left:50%;bottom:115px;transform:translateX(-50%);width:min(90%,560px);background:#fff;border:4px solid var(--night);border-radius:24px;padding:15px;display:none;box-shadow:0 12px 0 #173d5030}
-.card.show{display:block}.card strong{font-size:20px}.card p{margin:5px 0 0;font-size:16px}.close{margin-top:10px;min-height:44px;width:100%;padding:7px}
-footer{background:#fff7df;text-align:center;padding:10px;font-size:12px;font-weight:800}
-@media(max-width:600px){.world{min-height:650px}.actions{grid-template-columns:1fr 1fr}.actions button:last-child{grid-column:1/-1}.hero{left:42%;transform:scale(.9)}.bubble{top:7%}}
+:root{--ink:#173d50;--cream:#fff7df;--sky:#8ed7e8;--sand:#dfbd7b;--green:#668b5d;--water:#45a8c3;--sun:#ffd45b;--white:#fff;--red:#c96b55}
+*{box-sizing:border-box}html,body{margin:0;background:var(--ink);font-family:system-ui,-apple-system,Segoe UI,sans-serif;color:var(--ink)}button{font:inherit}
+.app{min-height:100vh;display:flex;flex-direction:column}.top{height:68px;padding:9px 14px;display:flex;justify-content:space-between;align-items:center;background:var(--ink);color:#fff;z-index:30}.logo{font-size:clamp(19px,5vw,31px);font-weight:1000;letter-spacing:-1.2px}.logo b{color:var(--sun)}.stars{background:#fff;color:var(--ink);font-weight:1000;border:3px solid var(--sun);border-radius:999px;padding:7px 12px}
+.world{position:relative;min-height:700px;flex:1;overflow:hidden;background:linear-gradient(var(--sky) 0 49%,var(--sand) 49% 70%,var(--water) 70%)}.sun{position:absolute;right:8%;top:6%;width:78px;height:78px;border-radius:50%;background:var(--sun);box-shadow:0 0 0 12px #ffd45b44}.barda{position:absolute;bottom:40%;left:-12%;width:76%;height:27%;background:var(--green);border-radius:55% 55% 0 0}.barda.two{left:44%;width:68%;height:23%;background:#557a58;transform:rotate(3deg)}.river{position:absolute;bottom:0;width:100%;height:30%;background:var(--water);border-top:5px solid #e7fafb88}.river:after{content:"";position:absolute;top:25%;left:7%;width:18%;height:5px;border-radius:9px;background:#fff9;box-shadow:180px 32px #fff7,430px 5px #fff6}.road{position:absolute;bottom:20%;left:39%;width:25%;height:48%;background:#d4ab67;transform:skew(-12deg);border-radius:45% 45% 0 0}.reed{position:absolute;bottom:27%;width:7px;height:60px;background:#486d4b;border-radius:8px;box-shadow:15px 13px #486d4b,-14px 8px #486d4b}.reed.a{left:13%}.reed.b{right:14%}
+.sign{position:absolute;z-index:5;left:10%;bottom:32%;background:var(--cream);border:4px solid var(--ink);border-radius:12px;padding:8px 12px;font-weight:1000;box-shadow:0 5px #173d5033}.chacra{position:absolute;z-index:4;right:10%;bottom:34%;font-size:46px}.tree{position:absolute;z-index:4;right:26%;bottom:34%;font-size:54px}
+.character{position:absolute;z-index:12;left:43%;bottom:29%;width:100px;height:125px;cursor:pointer;animation:float 1.8s ease-in-out infinite}.head{position:absolute;left:25px;top:13px;width:52px;height:52px;border-radius:50%;background:#d99b68;border:5px solid var(--ink)}.hair{position:absolute;left:25px;top:9px;width:52px;height:25px;background:#50382e;border:5px solid var(--ink);border-radius:50% 50% 35% 35%;z-index:2}.body{position:absolute;left:17px;top:64px;width:68px;height:56px;background:#c76d55;border:5px solid var(--ink);border-radius:24px}.leg{position:absolute;bottom:0;width:17px;height:38px;background:#384957;border:4px solid var(--ink);border-radius:10px}.leg.l{left:29px}.leg.r{right:29px}@keyframes float{50%{transform:translateY(-8px) rotate(1deg)}}
+.panel{position:absolute;z-index:20;left:50%;top:6%;transform:translateX(-50%);width:min(92%,650px);background:#fffdf4;border:4px solid var(--ink);border-radius:25px;padding:16px;box-shadow:0 12px 0 #173d5033;text-align:center;display:none}.panel.show{display:block;animation:pop .2s}.panel h1{font-size:clamp(21px,5vw,31px);margin:0 0 5px}.panel p{margin:0;font-size:16px;font-weight:650}.panel .close{margin-top:11px;width:100%;min-height:45px;background:var(--sun);border:3px solid var(--ink);border-radius:15px;font-weight:1000}@keyframes pop{from{transform:translateX(-50%) scale(.82);opacity:0}to{transform:translateX(-50%) scale(1);opacity:1}}
+.hud{position:absolute;z-index:16;left:50%;bottom:20px;transform:translateX(-50%);width:min(95%,760px);display:grid;grid-template-columns:repeat(4,1fr);gap:8px}.action{min-height:70px;border:4px solid var(--ink);border-radius:18px;background:#fff;color:var(--ink);font-weight:1000;box-shadow:0 6px #173d5033;cursor:pointer}.action:active{transform:translateY(4px);box-shadow:0 2px #173d5033}.action small{display:block;font-size:11px}.locked{opacity:.7}.notice{position:absolute;z-index:18;bottom:104px;left:50%;transform:translateX(-50%);background:var(--cream);border:3px solid var(--ink);border-radius:16px;padding:9px 14px;font-weight:900;display:none}
+footer{background:var(--cream);padding:9px;text-align:center;font-size:11px;font-weight:800}
+@media(max-width:620px){.world{min-height:650px}.hud{grid-template-columns:1fr 1fr}.action{min-height:64px}.character{left:39%;transform:scale(.9)}.sign{left:4%;font-size:12px}.chacra{right:4%;font-size:37px}.tree{right:23%;font-size:44px}}
 </style>
 </head>
 <body>
-<main class="game">
-<header class="top"><div class="logo">VILLA <span>PICÚN</span></div><div class="score" id="score">⭐ 0 / 5</div></header>
-<section class="world" aria-label="Aventura inicial">
-<div class="sun"></div><div class="mountain"></div><div class="mountain b"></div><div class="path"></div><div class="river"></div><div class="reeds r1"></div><div class="reeds r2"></div>
-<div class="hero" id="hero" aria-label="Explorador">
-<div class="hat"></div><div class="head"></div><div class="body"></div><div class="leg l"></div><div class="leg r"></div>
-</div>
-<div class="bubble" id="bubble"><h2 id="bubbleTitle">¡Bienvenido!</h2><p id="bubbleText">Hoy vamos a jugar y descubrir historias de Picún Leufú.</p></div>
-<div class="card" id="card"><strong id="cardTitle"></strong><p id="cardText"></p><button class="close" id="close">¡Seguir jugando!</button></div>
-<div class="actions">
-<button data-key="agua">💧<br>Buscar agua</button>
-<button data-key="huellas">👣<br>Buscar huellas</button>
-<button data-key="pueblo">🏘️<br>Conocer el pueblo</button>
-<button data-key="familias">👨‍👩‍👧<br>Encontrar una historia</button>
-<button data-key="tesoro">⭐<br>Buscar sorpresa</button>
-</div>
+<main class="app">
+<header class="top"><div class="logo">VILLA <b>PICÚN</b></div><div class="stars" id="score">⭐ 0 / 6</div></header>
+<section class="world">
+<div class="sun"></div><div class="barda"></div><div class="barda two"></div><div class="road"></div><div class="river"></div>
+<div class="reed a"></div><div class="reed b"></div><div class="sign">PICÚN LEUFÚ</div><div class="chacra">🌾🐑</div><div class="tree">🌳</div>
+<div class="character" id="hero"><div class="hair"></div><div class="head"></div><div class="body"></div><div class="leg l"></div><div class="leg r"></div></div>
+<div class="panel" id="panel"><h1 id="pt"></h1><p id="px"></p><button class="close" id="close">¡Vamos!</button></div>
+<div class="notice" id="notice">⭐ ¡Nuevo recuerdo!</div>
+<nav class="hud">
+<button class="action" data-id="arroyo">💧<small>Arroyo</small>Explorar</button>
+<button class="action" data-id="chacra">🌾<small>Chacras</small>Ayudar</button>
+<button class="action" data-id="historia">🏘️<small>Historia</small>Viajar</button>
+<button class="action" data-id="sauce">🌲<small>El Sauce</small>Descubrir</button>
+<button class="action" data-id="fiesta">🐎<small>Fiesta</small>Jugar</button>
+<button class="action" data-id="huellas">👣<small>Pasado</small>Buscar</button>
+<button class="action" data-id="mapa">🗺️<small>Mapa</small>Mirar</button>
+<button class="action" data-id="familia">❤️<small>Memoria</small>Guardar</button>
+</nav>
 </section>
-<footer>Villa Picún · una historia para jugar · Ocarina Producciones</footer>
+<footer>Villa Picún · una aventura hecha para jugar y descubrir el lugar</footer>
 </main>
 <script>
-const items={
-agua:["💧 ¡Encontraste el agua!","El agua acompaña la vida de este lugar. Mirá, escuchá y seguí explorando."],
-huellas:["👣 ¡Huellas misteriosas!","Hay historias que empezaron muchísimo antes de nosotros. ¿Quién habrá pasado por acá?"],
-pueblo:["🏘️ ¡Encontraste el pueblo!","Acá viven personas, familias, recuerdos y muchas historias para descubrir."],
-familias:["👨‍👩‍👧 ¡Una historia familiar!","Las personas también guardan la memoria de un lugar. Cada recuerdo puede ser una aventura."],
-tesoro:["⭐ ¡Sorpresa encontrada!","¡Completaste la primera búsqueda! Ahora Picún Leufú tiene más secretos para vos."]
+const data={
+arroyo:["💧 El arroyo Picún Leufú","Picún Leufú significa “arroyo del norte”. El arroyo recorre la tierra y forma parte de la identidad del lugar."],
+chacra:["🌾 Día de chacra","Acá la aventura se hace con las manos: ayudar, cuidar, compartir y descubrir el trabajo de quienes viven de la tierra."],
+historia:["🏘️ Un pueblo con memoria","Picún Leufú tuvo distintos momentos y traslados. En 1971 se inauguró el nuevo asentamiento, después de que el antiguo quedara afectado por el embalse."],
+sauce:["🌲 El Sauce","En el departamento Picún Leufú está el Bosque Petrificado El Sauce, protegido como patrimonio cultural e histórico de Neuquén."],
+fiesta:["🐎 Fiesta del Chacarero","Caballos, campo, música, artesanos y productores: una celebración de la cultura del trabajo y de la gente de Picún Leufú."],
+huellas:["👣 Mirá el suelo","La zona conserva un enorme pasado geológico y paleontológico. Cada piedra puede esconder una historia muchísimo más antigua que el pueblo."],
+mapa:["🗺️ ¿A dónde vamos?","Río, chacras, pueblo y caminos. En las próximas aventuras vas a poder recorrer Picún Leufú como si estuvieras ahí."],
+familia:["❤️ La memoria también juega","Las historias de las familias son parte de un pueblo. En este juego, cada recuerdo que sumemos puede convertirse en una nueva aventura."]
 };
-const found=new Set(),score=document.getElementById("score"),card=document.getElementById("card"),ct=document.getElementById("cardTitle"),cx=document.getElementById("cardText"),bubble=document.getElementById("bubble");
-function say(title,text){document.getElementById("bubbleTitle").textContent=title;document.getElementById("bubbleText").textContent=text;bubble.classList.add("show");clearTimeout(window.bt);window.bt=setTimeout(()=>bubble.classList.remove("show"),3200)}
-function discover(key){if(!found.has(key)){found.add(key);score.textContent="⭐ "+found.size+" / 5"}ct.textContent=items[key][0];cx.textContent=items[key][1];card.classList.add("show");if(found.size===5)say("🎉 ¡Misión cumplida!","Encontraste las 5 sorpresas de la primera aventura.");}
-document.querySelectorAll("[data-key]").forEach(b=>b.onclick=()=>discover(b.dataset.key));
-document.getElementById("close").onclick=()=>card.classList.remove("show");
-document.getElementById("hero").onclick=()=>say("👋 ¡Hola, explorador!","Tocá, buscá y descubrí. Acá la historia se aprende jugando.");
-say("🌊 ¡Bienvenido a Villa Picún!","Tu primera misión: encontrar 5 sorpresas. ¡No hace falta leer mucho: explorá!");
+const found=new Set(),score=document.getElementById("score"),panel=document.getElementById("panel"),pt=document.getElementById("pt"),px=document.getElementById("px"),notice=document.getElementById("notice");
+function openItem(id){const d=data[id];if(!d)return;if(!found.has(id)){found.add(id);score.textContent="⭐ "+found.size+" / 6";notice.textContent="⭐ ¡Nuevo descubrimiento!";notice.style.display="block";setTimeout(()=>notice.style.display="none",1800)}pt.textContent=d[0];px.textContent=d[1];panel.classList.add("show");if(found.size===6){setTimeout(()=>say("🎉 ¡Picún Leufú te necesita!","Completaste la primera ronda. Ahora podemos abrir nuevas aventuras del pueblo."),350)}}
+function say(t,x){pt.textContent=t;px.textContent=x;panel.classList.add("show")}
+document.querySelectorAll("[data-id]").forEach(b=>b.onclick=()=>openItem(b.dataset.id));
+document.getElementById("close").onclick=()=>panel.classList.remove("show");
+document.getElementById("hero").onclick=()=>say("👋 ¡Hola!","Soy tu compañero de aventura. Acá no venimos a estudiar de memoria: venimos a descubrir Picún Leufú.");
+say("🌊 Bienvenidos a Picún Leufú","Una aventura familiar donde el arroyo, las chacras, la memoria, el campo y los lugares del departamento se convierten en juego.");
 </script>
 </body></html>
